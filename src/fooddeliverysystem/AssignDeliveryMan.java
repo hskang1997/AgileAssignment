@@ -27,6 +27,7 @@ public class AssignDeliveryMan {
     private static String NOTAVAILABLE_STATUS = "Not Available";
 
     private Scanner scan = new Scanner(System.in);
+    
     private Date dateAdded = new Date(1, 1, 2017);
     private Date deliveryDate = new Date(11, 3, 2017);
 
