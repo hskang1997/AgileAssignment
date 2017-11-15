@@ -5,8 +5,10 @@
  */
 package Entity;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.ArrayList;
+import Entity.*;
+
 /**
  *
  * @author Hskang
@@ -19,6 +21,15 @@ public class Order {
     private Date orderDate;
     private String foodName;
     private double totalPrice;
+    private double foodPrice;
+
+    public double getFoodPrice() {
+        return foodPrice;
+    }
+
+    public void setFoodPrice(double foodPrice) {
+        this.foodPrice = foodPrice;
+    }
 
     public double getTotalPrice() {
         return totalPrice;
@@ -46,7 +57,7 @@ public class Order {
         
     }
 
-    public Order(Date orderDate, String orderID, String foodName, double totalAmount, double gstAmount, int foodQty, double totalPrice) {
+    public Order(Date orderDate, String orderID, String foodName, double totalAmount, double gstAmount, int foodQty, double totalPrice, double foodPrice) {
         this.orderDate = orderDate;
         this.orderID = orderID;
         this.foodName = foodName;
@@ -54,6 +65,7 @@ public class Order {
         this.gstAmount = gstAmount;
         this.foodQty = foodQty;
         this.totalPrice = totalPrice;
+        this.foodPrice = foodPrice;
     }
 
     public String generateOrderID(int size) {
@@ -124,6 +136,10 @@ public class Order {
     }
 
     public String toString() {
-        return "\nOrdered Food: " + foodName + "\nOrdered Quantity: " + foodQty ;
+        return foodName + "\t\t   " + foodQty + "\t\t\t " + foodPrice;
+    }
+    
+    public String total(){
+        return String.format("\nSub Total: RM%.2f \nGST: RM%.2f \nTotal Price: RM%.2f",totalAmount,gstAmount,totalPrice);
     }
 }
