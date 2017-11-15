@@ -8,10 +8,6 @@ package Entity;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- *
- * @author Hskang
- */
 public class Menu {
 
     private String menuID;
@@ -30,7 +26,6 @@ public class Menu {
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.dateAdded = dateAdded;
-        this.menuStatus = true;
     }
 
     // Full
@@ -40,6 +35,10 @@ public class Menu {
         this.menuPrice = menuPrice;
         this.menuStatus = menuStatus;
         this.dateAdded = dateAdded;
+    }
+
+    Menu(String m001, String ramen, double d, Calendar cal) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getMenuID() {
@@ -83,10 +82,10 @@ public class Menu {
     }
 
     public String toString() {
-        if (this.isMenuStatus()) {
-            return "Menu Name: " + this.getMenuName() + "\n Menu Price: " + this.getMenuPrice() + "\n Menu Status: Available";
+        if (menuStatus) {
+            return menuID + " \t\t\t " + menuName + " \t\t    " + menuPrice + "\t\t Available" + "\n";
         } else {
-            return "Menu Name: " + this.getMenuName() + "\n Menu Price: " + this.getMenuPrice() + "\n Menu Status: Not Available";
+            return menuID + " \t\t\t " + menuName + " \t\t    " + menuPrice + "\t\t Not Available" + "\n";
         }
     }
 
