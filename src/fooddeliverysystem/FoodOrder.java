@@ -35,19 +35,21 @@ public class FoodOrder {
         Date date = cal.getTime();
         Order order = new Order();
         String foName = "";
+        double foodPrice = 0;
         String foodID = "";
         double totalPrice = 0;
         double gst = 0;
         double totalAmount = 0;
         boolean check = false;
+        boolean valid = true;
 
         menuList.clear();
         menuList2.clear();
         restaurantList.clear();
-        int noRest;
+        int noRest = 0;
 
         Menu menu1 = new Menu("M001", "Curry Ramen", 12.90, true, date);
-        Menu menu2 = new Menu("M002", "Blue eyes white Ramen", 22.90, true, date);
+        Menu menu2 = new Menu("M002", "Blue Ramen", 22.90, true, date);
         Menu menu3 = new Menu("M003", "Sushi AF", 10.90, true, date);
         Menu menu4 = new Menu("M004", "Zheng Sushi", 5.90, true, date);
         menuList.add(menu1);
@@ -65,20 +67,28 @@ public class FoodOrder {
             System.out.print(String.format("\n%d. ", r + 1));
             System.out.println(restaurantList.get(r).toString());
         }
+        do {
+            System.out.print("Enter a restaurant number: ");
+            try {
+                noRest = scan.nextInt();
+                valid = true;
+            } catch (java.util.InputMismatchException e) {
+                scan.next();
+                System.out.println("Invalid Input");
+                valid = false;
+            }
+        } while (valid == false);
 
-        System.out.print("Enter a restaurant number: ");
-        try {
-            noRest = scan.nextInt();
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("Invalid Input");
-            return;
-        }
         do {
             if (noRest == 1) {
+                System.out.println("Menu ID \t\t Menu Name \t\t Menu Price \t\t Menu Status");
+                System.out.println("======= \t\t ========= \t\t ========== \t\t ===========");
                 for (int i = 0; i < menuList.size(); i++) {
                     System.out.println(menuList.get(i).toString());
                 }
             } else if (noRest == 2) {
+                System.out.println("Menu ID \t\t Menu Name \t\t Menu Price \t\t Menu Status");
+                System.out.println("======= \t\t ========= \t\t ========== \t\t ===========");
                 for (int i = 0; i < menuList2.size(); i++) {
                     System.out.println(menuList2.get(i).toString());
                 }
@@ -86,19 +96,19 @@ public class FoodOrder {
 
             System.out.print("\nEnter Menu ID: ");
             foodID = scan.next();//Menu ID
-            if(foodID.length() > 4){
+            if (foodID.length() > 4) {
                 System.out.println("Invalid Input");
-                return;
+                start();
             }
 
-            int foodQty;
+            int foodQty = 0;
 
             System.out.print("\nEnter quantity: ");
             try {
                 foodQty = scan.nextInt();
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid Input");
-                return;
+                start();
             }
 
             System.out.print("\nAre you confirm your order?(Y/N)(-1 to exit) ");
@@ -108,17 +118,18 @@ public class FoodOrder {
                 int count = 0;
                 if (noRest == 1) {
                     for (int o = 0; o < menuList.size(); o++) {
+                        count++;
                         if (foodID.compareToIgnoreCase(menuList.get(o).getMenuID()) == 0) {
-                            count++;
                             order.setFoodName(menuList.get(o).getMenuName());
                             foName = menuList.get(o).getMenuName();
+                            foodPrice = menuList.get(o).getMenuPrice();
 
                             if (count == 1) {
                                 order.placeOrder(menu1, foodQty);
                                 totalPrice = order.getTotalAmount();
                                 gst = order.getGstAmount();
                                 totalAmount = order.getTotalPrice();
-                                
+
                             } else {
                                 order.placeOrder(menu2, foodQty);
                                 totalPrice = order.getTotalAmount();
@@ -129,10 +140,11 @@ public class FoodOrder {
                     }
                 } else if (noRest == 2) {
                     for (int o = 0; o < menuList2.size(); o++) {
+                        count++;
                         if (foodID.compareToIgnoreCase(menuList2.get(o).getMenuID()) == 0) {
-                            count++;
                             order.setFoodName(menuList2.get(o).getMenuName());
                             foName = menuList2.get(o).getMenuName();
+                            foodPrice = menuList.get(o).getMenuPrice();
 
                             if (count == 1) {
                                 order.placeOrder(menu3, foodQty);
@@ -156,24 +168,22 @@ public class FoodOrder {
                 order.setOrderID(orderID);
                 order.setOrderDate(todayDate);
                 check = confirmation();
-                
 
-                Order order2 = new Order(todayDate, orderID, foName, totalPrice, gst, foodQty, totalAmount);
+                Order order2 = new Order(todayDate, orderID, foName, totalPrice, gst, foodQty, totalAmount, foodPrice);
                 foodOrder.add(order2);
 
             } else {
                 check = confirmation();
-                
+
             }
         } while (check == true);
-        System.out.println("Ordered Date: " + order.getOrderDate());
-        System.out.println("Ordered ID: " + order.getOrderID());
+        System.out.println("\nOrdered Date: " + order.getOrderDate());
+        System.out.println("\nFood Name \t\t Quantity \t\t Price(RM)");
+        System.out.println("\n========= \t\t ======== \t\t ========");
         for (int f = 0; f < foodOrder.size(); f++) {
             System.out.println(foodOrder.get(f).toString());
         }
-        System.out.println("Sub Total: " + order.getTotalAmount());
-        System.out.println("GST: " + order.getGstAmount());
-        System.out.println("Total Price: " + order.getTotalPrice());
+        System.out.println(order.total());
 
     }
 
