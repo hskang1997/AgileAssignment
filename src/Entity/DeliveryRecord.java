@@ -74,8 +74,7 @@ public class DeliveryRecord {
         return deliveryRecords;
     }
     
-    
-     public void setDeliveryRecords(ArrayList<Delivery> deliveryRecords) {
+    public void setDeliveryRecords(ArrayList<Delivery> deliveryRecords) {
         this.deliveryRecords = deliveryRecords;
     }
     

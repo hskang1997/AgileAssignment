@@ -5,8 +5,8 @@
  */
 package fooddeliverysystem;
 
+import Entity.Address;
 import Entity.Affiliates;
-import Entity.Date;
 import Entity.Delivery;
 import Entity.DeliveryMan;
 import Entity.DeliveryRecord;
@@ -14,6 +14,7 @@ import Entity.Menu;
 import Entity.Order;
 import Entity.Vehicle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -28,9 +29,10 @@ public class AssignDeliveryMan {
 
     private Scanner scan = new Scanner(System.in);
     
-    private Date dateAdded = new Date(1, 1, 2017);
-    private Date deliveryDate = new Date(11, 3, 2017);
+    private Date dateAdded = new Date(2017, 1, 1);
+    private Date deliveryDate = new Date(2017, 11, 3);
 
+    private Address address, destination1, destination2, destination3;
     private Affiliates deliverySource;
     private ArrayList<Order> orderList = new ArrayList<Order>();
     private ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
@@ -46,7 +48,8 @@ public class AssignDeliveryMan {
 
     public AssignDeliveryMan() {
 
-        deliverySource = new Affiliates("R0001", "Western Food Restaurant", "012-3456789", "135, Taman Kaya, 55333 Setapak, Kuala Lumpur", "western@gmail.com");
+        address = new Address("135", "Taman Kaya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        deliverySource = new Affiliates("Kelvin Tan", "600121021263", "User1", "abc123", "R0001", "Western Food Restaurant", "012-3456789", address, "western@gmail.com");
 
         man1 = new DeliveryMan("S0001", "Jason", "750303075313", "012-3456789", "123, Jalan ABC, 11200 Penang.", "jason@gmail.com", vehicle, "Employed", "Available");
         man2 = new DeliveryMan("S0002", "David", "850512025411", "013-3456789", "456, Jalan DEF, 53300 KL.", "daivd@hotmail.com", vehicle, "Retired", "Not Available");
@@ -79,13 +82,17 @@ public class AssignDeliveryMan {
         orderList.add(order2);
         orderList.add(order3);
 
-        delivery1 = new Delivery("L0001", deliveryDate, deliverySource, "123,Taman Selamat", 4.90);
-        delivery2 = new Delivery("L0002", deliveryDate, deliverySource, "456,Taman Bahagia", 2.50);
-        delivery3 = new Delivery("L0003", deliveryDate, deliverySource, "789,Taman Sejahtera", 3.60);
+        destination1 = new Address();
+        destination2 = new Address();
+        destination3 = new Address();
+        
+        delivery1 = new Delivery("L0001", deliveryDate, deliverySource, destination1, 4.90);
+        delivery2 = new Delivery("L0002", deliveryDate, deliverySource, destination2, 2.50);
+        delivery3 = new Delivery("L0003", deliveryDate, deliverySource, destination3, 3.60);
 
-        delivery1.setOrder(order1);
-        delivery2.setOrder(order2);
-        delivery3.setOrder(order3);
+        delivery1.addOrderList(order1);
+        delivery2.addOrderList(order2);
+        delivery3.addOrderList(order3);
 
         deliveryList.add(delivery1);
         deliveryList.add(delivery2);
@@ -209,7 +216,7 @@ public class AssignDeliveryMan {
 
         if (deliveryRecordList.isEmpty()) {
             DeliveryRecord deliveryRecord = new DeliveryRecord(selectedDeliveryMan);
-            deliveryRecord.addDeliveryList(selectedDelivery);
+            deliveryRecord.addDeliveryRecords(selectedDelivery);
             deliveryRecordList.add(deliveryRecord); // Create new Delivery Record when there is no existing Delivery Man in the Delivery Record List
         } else {
             String selectedDeliveryManID = selectedDeliveryMan.getDeliveryManID();
@@ -220,12 +227,12 @@ public class AssignDeliveryMan {
 
                 if (selectedDeliveryManID.compareTo(existingDeliveryManID) == 0) { // Check whether there is the similar Delivery Man in the Delivery Record List
                     // if there is similar Delivery Man in the Delivery Record List, just add the selected Delivery into the existing Delivery Man Records
-                    deliveryRecordList.get(i).addDeliveryList(selectedDelivery);
+                    deliveryRecordList.get(i).addDeliveryRecords(selectedDelivery);
                     break;
                 } else {
                     // else create a new Delivery Record based on the new Delivery Man
                     DeliveryRecord deliveryRecord = new DeliveryRecord(selectedDeliveryMan);
-                    deliveryRecord.addDeliveryList(selectedDelivery);
+                    deliveryRecord.addDeliveryRecords(selectedDelivery);
                     deliveryRecordList.add(deliveryRecord);
                     break;
                 }
@@ -242,9 +249,9 @@ public class AssignDeliveryMan {
             System.out.println("" + (i + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryMan().displayDeliveryMan());
 
             System.out.println(String.format("\t%-3s\t%-10s\t%-20s\t%-30s\t%-30s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
-            for (int j = 0; j < deliveryRecordList.get(i).getDeliveryList().size(); j++) {
+            for (int j = 0; j < deliveryRecordList.get(i).getDeliveryRecords().size(); j++) {
                 System.out.println("\t=====================================================================================================================================================");
-                System.out.println("\t" + (j + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryList().get(j).displayDelivery());
+                System.out.println("\t" + (j + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryRecords().get(j).displayDelivery());
             }
             System.out.println("\n\n");
         }
