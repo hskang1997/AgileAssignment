@@ -13,6 +13,12 @@ import java.util.ArrayList;
  */
 public class Affiliates {
     
+    private String ownerName;
+    private String IC;
+    private String userName;
+    private String password;
+    
+    
     private String restaurantID;
     private String restaurantName;
     private String restaurantPhone;
@@ -25,12 +31,50 @@ public class Affiliates {
     }
 
     // Full
-    public Affiliates(String restaurantID, String restaurantName, String restaurantPhone, Address restaurantAddress, String restaurantEmail) {
+
+    public Affiliates(String ownerName, String IC, String userName, String password, String restaurantID, String restaurantName, String restaurantPhone, Address restaurantAddress, String restaurantEmail) {
+        this.ownerName = ownerName;
+        this.IC = IC;
+        this.userName = userName;
+        this.password = password;
         this.restaurantID = restaurantID;
         this.restaurantName = restaurantName;
         this.restaurantPhone = restaurantPhone;
         this.restaurantAddress = restaurantAddress;
         this.restaurantEmail = restaurantEmail;
+    }
+
+    public String getIC() {
+        return IC;
+    }
+
+    public void setIC(String IC) {
+        this.IC = IC;
+    }
+    
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRestaurantID() {
@@ -82,6 +126,7 @@ public class Affiliates {
     }
     
     public String toString() {
-        return "Restaurant Name: " + restaurantName + "\n Restaurant Contact: " + restaurantPhone + "\n Restaurant Email: " + restaurantEmail + "\n Restaurant Address: " + restaurantAddress.toString() + "\n";
+        return "Welcome\nOwner Name : " + ownerName + "\nIC :"+ IC + "\nRestaurant Name: " + restaurantName + "\n Restaurant Contact: " + restaurantPhone + "\n Restaurant Email: " + restaurantEmail + "\n Restaurant Address: " + restaurantAddress.toString() + "\n";
     }
 }
+

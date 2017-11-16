@@ -58,8 +58,8 @@ public class FoodOrder {
         menuList2.add(menu4);
         Address address = new Address("B-21-10", "Jalan Danau Saujana", 53000, "Setapak", "Kuala Lumpur", "Malaysia");
         Address address2 = new Address("B-21-10", "Jalan Danau Saujana", 53000, "Setapak", "Kuala Lumpur", "Malaysia");
-        Affiliates restaurant1 = new Affiliates("R01", "LYSRamen", "0167025919", address, "Ramen@hotmail.com");
-        Affiliates restaurant2 = new Affiliates("R02", "GWHSushi", "0161234919", address2, "Sushi@hotmail.com");
+        Affiliates restaurant1 = new Affiliates("Goh", "950909-02-6568", "harutei", "harutei1234", "Harutei", "AS01561898-V", "012-3456789", address, "Harutei@gmail.com");
+        Affiliates restaurant2 = new Affiliates("Lim", "970908-02-6988", "sushiking", "sushi1234", "Sushi King", "AS04993821-V", "012-3456789", address2, "sushiKing@gmail.com");
         restaurantList.add(restaurant1);
         restaurantList.add(restaurant2);
 

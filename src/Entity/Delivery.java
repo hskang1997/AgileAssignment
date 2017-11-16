@@ -10,9 +10,10 @@ package Entity;
  * @author Hskang
  */
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Delivery {
- 
+
     private String deliveryID;
     private Date deliveryDate;
     private Affiliates deliverySource;
@@ -73,7 +74,7 @@ public class Delivery {
         this.orderList = orderList;
     }
 
-   public void addOrderList(Order order) {
+    public void addOrderList(Order order) {
         this.orderList.add(order);
     }
 
@@ -84,21 +85,21 @@ public class Delivery {
     public void setDeliveryCharges(double deliveryCharges) {
         this.deliveryCharges = deliveryCharges;
     }
-    
-     public String displayOrderList() {
+
+    public String displayOrderList() {
         String orderResult = "";
-        
+
         if (!orderList.isEmpty()) {
             orderResult += "No. \t Order ID \t Order Date \t Amount(RM)\n";
-            for (int i=this.orderList.size(); i>=0; i--) {
+            for (int i = this.orderList.size(); i >= 0; i--) {
                 orderResult += this.orderList.get(i).getOrderID() + " " + this.orderList.get(i).getOrderDate() + " " + this.orderList.get(i).getTotalAmount() + "\n";
             }
         }
-        
+
         return orderResult;
     }
 
-  
-    
-    
+    public String displayDelivery() {
+        return String.format("%-10s\t%-20s\t%-30s\t%-30s\t%-10s\t%-10.2f", this.deliveryID, this.deliveryDate.toString(), this.deliverySource.getRestaurantName(), this.deliveryDestination.toString(), "Order ID", this.deliveryCharges);
+    }
 }
