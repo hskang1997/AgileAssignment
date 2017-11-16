@@ -14,6 +14,7 @@ import Entity.*;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.List;
+import java.util.InputMismatchException;
 
 public class makeScheduleOrder {
 
@@ -83,9 +84,10 @@ public class makeScheduleOrder {
         actualSelectedRestaurantIndex = 0;
         wrongCount = 0;
         qty = 0;
+        boolean check = false;
         //System.out.println("Restaurant Available > ");
         do {
-             System.out.println("Restaurant Available > ");
+            System.out.println("Restaurant Available > ");
             arrRestaurant.clear();
             arrRestaurant.add(restaurant1);
             arrRestaurant.add(restaurant2);
@@ -94,9 +96,22 @@ public class makeScheduleOrder {
                 System.out.println(i + 1 + "  " + arrRestaurant.get(i).getRestaurantName());
 
             }
-            System.out.print("Please choose a restaurant(0 to exit) > ");
-            userselectedRestaurant = scan.nextInt();
-            actualSelectedRestaurantIndex = userselectedRestaurant - 1;
+            do {
+                try {
+                    System.out.print("Please choose a restaurant(0 to exit) > ");
+                    userselectedRestaurant = scan.nextInt();
+                    actualSelectedRestaurantIndex = userselectedRestaurant - 1;
+                    check = false;
+                    break;
+
+                } catch (InputMismatchException ex) {
+                    System.out.println("Please enter integer values within the range only.");
+                    scan.next();
+                    check = true;
+
+                }
+            } while (check == true);
+
             if (userselectedRestaurant < 0 || userselectedRestaurant >= arrRestaurant.size() + 1) {
                 System.out.println("Please enter integer values within the range only.");
             }
@@ -120,6 +135,7 @@ public class makeScheduleOrder {
     }
 
     public void continueOrder() {
+        boolean check = false;
         arrlistMenu1.clear();
         System.out.println();
         System.out.println(arrRestaurant.get(actualSelectedRestaurantIndex).getRestaurantName());
@@ -138,9 +154,21 @@ public class makeScheduleOrder {
                         + String.format("\t\t %s", arrlistMenu1.get(j).getMenuStatus()));
                 System.out.println();
             }
-            System.out.print("Please select the meal(0 to back) > ");
-            userEnteredMeal = scan.nextInt();
-            actualSelectedMealIndex = userEnteredMeal - 1;
+            do {
+                try {
+                    System.out.print("Please select the meal(0 to back) > ");
+                    userEnteredMeal = scan.nextInt();
+                    actualSelectedMealIndex = userEnteredMeal - 1;
+                    check = false;
+                    break;
+                } catch (InputMismatchException ex) {
+                    System.out.println("Please enter integer values within the range only.");
+                    scan.next();
+                    check = true;
+                }
+
+            } while (check == true);
+
             if (userEnteredMeal < 0 || userEnteredMeal >= arrlistMenu1.size() + 1) {
                 System.out.println("Please enter integer values within the range only.");
             }
@@ -157,10 +185,20 @@ public class makeScheduleOrder {
                 ++wrongCount;
                 System.out.println();
                 do {
+                    do {
+                        try {
+                            System.out.print("The meal is currently not available. Please select again (0 to back) >");
+                            userEnteredMeal = scan.nextInt();
+                            actualSelectedMealIndex = userEnteredMeal - 1;
+                            check = false;
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter integer values within the range only.");
+                            scan.next();
+                            check = true;
+                        }
+                    } while (check == true);
 
-                    System.out.print("The meal is currently not available. Please select again (0 to back) >");
-                    userEnteredMeal = scan.nextInt();
-                    actualSelectedMealIndex = userEnteredMeal - 1;
                 } while (userEnteredMeal < 0 || userEnteredMeal >= arrlistMenu1.size() + 1);
                 if (userEnteredMeal == 0) {
                     makeOrders();
@@ -174,9 +212,20 @@ public class makeScheduleOrder {
                         ++wrongCount;
                         System.out.println();
                         do {
-                            System.out.print("The meal is currently not available. Please select again (0 to back) >");
-                            userEnteredMeal = scan.nextInt();
-                            actualSelectedMealIndex = userEnteredMeal - 1;
+
+                            do {
+                                try {
+                                    System.out.print("The meal is currently not available. Please select again (0 to back) >");
+                                    userEnteredMeal = scan.nextInt();
+                                    actualSelectedMealIndex = userEnteredMeal - 1;
+                                    check = false;
+                                    break;
+                                } catch (InputMismatchException ex) {
+                                    System.out.println("Please enter integer values within the range only.");
+                                    scan.next();
+                                    check = true;
+                                }
+                            } while (check == true);
                         } while (userEnteredMeal < 0 || userEnteredMeal >= arrlistMenu1.size() + 1);
                         if (userEnteredMeal == 0) {
                             makeOrders();
@@ -196,8 +245,19 @@ public class makeScheduleOrder {
         }
         System.out.println();
         do {
-            System.out.print("Please Enter Quantity to order (0 to back to select restaurant) >");
-            qty = scan.nextInt();
+            do {
+                try {
+                    System.out.print("Please Enter Quantity to order (0 to back to select restaurant) >");
+                    qty = scan.nextInt();
+                    check = false;
+                    break;
+                } catch (InputMismatchException ex) {
+                    System.out.println("Please enter integer values within the range that less than 11 only.");
+                    scan.next();
+                    check = true;
+                }
+            } while (check == true);
+
             if (qty < 0 || qty > 10) {
                 System.out.println("Please enter integer values within the range that less than 11 only.");
             }
@@ -209,8 +269,19 @@ public class makeScheduleOrder {
             orderQty.add(qty);
             System.out.println();
             do {
-                System.out.print("Press 1 to back to menu and order more food (2 to proceed to time selection) > ");
-                contChoice = scan.nextInt();
+                do {
+                    try {
+                        System.out.print("Press 1 to back to menu and order more food (2 to proceed to time selection) > ");
+                        contChoice = scan.nextInt();
+                        check = false;
+                        break;
+                    } catch (InputMismatchException ex) {
+                        System.out.println("Please enter integer values within the range only.");
+                        scan.next();
+                        check = true;
+                    }
+                } while (check == true);
+
                 if (contChoice < 1 || contChoice > 2) {
                     System.out.println("Please enter integer values within the range only.");
                 }
@@ -224,14 +295,27 @@ public class makeScheduleOrder {
     }
 
     public void orderAddressTime() {
+        boolean check = false;
         System.out.println();
         System.out.println("Delivery Schedule: ");
         System.out.println("1 12:00 PM");
         System.out.println("2 6:00 PM");
         System.out.println("3 8:00 PM");
         do {
-            System.out.print("Please Select time to deliver (0 to back) >");
-            selectedTime = scan.nextInt();
+            do {
+                try {
+                    System.out.print("Please Select time to deliver (0 to back) >");
+                    selectedTime = scan.nextInt();
+                    check = false;
+                    break;
+                } catch (InputMismatchException ex) {
+                    System.out.println("Please enter integer values within the range only.");
+                    scan.next();
+                    check = true;
+                }
+
+            } while (check == true);
+
             if (selectedTime < 0 || selectedTime > 3) {
                 System.out.println("Please enter integer values within the range only.");
             }
@@ -247,8 +331,19 @@ public class makeScheduleOrder {
                 System.out.println("2 Kuala Lumpur");
                 System.out.println("3 Klang");
                 do {
-                    System.out.print("Please Select Area to deliver (0 to back) >");
-                    selectedArea = scan.nextInt();
+                    do {
+                        try {
+                            System.out.print("Please Select Area to deliver (0 to back) >");
+                            selectedArea = scan.nextInt();
+                            check = false;
+                            break;
+                        } catch (InputMismatchException ex) {
+                            System.out.println("Please enter integer values within the range only.");
+                            scan.next();
+                            check = true;
+                        }
+                    } while (check == true);
+
                     if (selectedArea < 0 || selectedArea > 3) {
                         System.out.println("Please enter integer values within the range only.");
                     }
@@ -271,7 +366,6 @@ public class makeScheduleOrder {
                             }
 
                             System.out.println("Please enter exact deliver address >");
-
                             deliverAddress = stringScan.nextLine();
                         } while (deliverAddress.equals(""));
                         scheduledOrders.setOrderID(defaultOrderID);
@@ -320,15 +414,18 @@ public class makeScheduleOrder {
         scheduledOrders.setSubtotal(total);
 
         System.out.println();
+        System.out.println();
         System.out.println("Menu Name   Quantity    Price(per unit)");
         for (int i = 0; i < selectedMenu.size(); i++) {
-            System.out.println(scheduledOrders.getOrderedMenu().get(i).getMenuName() + "      " + scheduledOrders.getOrderedMenuQty().get(i)
-                    + "     " + selectedMenu.get(i).getMenuPrice());
+            System.out.println(scheduledOrders.getOrderedMenu().get(i).getMenuName() + "           " + scheduledOrders.getOrderedMenuQty().get(i)
+                    + "            " + selectedMenu.get(i).getMenuPrice());
         }
-        System.out.println("Deliver Time    Deliver Address  Amount  GST  Delivery Fees   Subtotal");
-        System.out.println(scheduledOrders.getSelectedTime() + "         " + scheduledOrders.getDeliveryAddress()
-                + "         " + scheduledOrders.getTotalAmount() + "  " + scheduledOrders.getGstAmount() + "  " + scheduledOrders.getDeliveryfees()
-                + "  " + scheduledOrders.getSubtotal());
+        System.out.println("Deliver Time : " + scheduledOrders.getSelectedTime());
+        System.out.println("Deliver Address : " + scheduledOrders.getDeliveryAddress());
+        System.out.println("Amount: " + scheduledOrders.getTotalAmount());
+        System.out.println("GST : " + scheduledOrders.getGstAmount());
+        System.out.println("Delivery Fees: " + scheduledOrders.getDeliveryfees());
+        System.out.println("Subtotal: " + scheduledOrders.getSubtotal());
 
         System.out.println();
 
@@ -343,19 +440,25 @@ public class makeScheduleOrder {
 
         if (confirm.equals("y") || confirm.equals("Y")) {
             listScheduleOrders.add(scheduledOrders);
+            System.out.println();
+            System.out.println();
             System.out.println("Thanks for using our system");
+            System.out.println();
             System.out.println("Order Summary");
-            System.out.println("Order ID    Order Date & Time");
-            System.out.println(scheduledOrders.getOrderID() + "  " + scheduledOrders.getOrderDateTime());
+            System.out.println("=============");
+            System.out.println("Order ID : " +scheduledOrders.getOrderID());
+            System.out.println("Order Date & Time :"+ scheduledOrders.getOrderDateTime());
             System.out.println("Menu Name   Quantity    Price(per unit)");
             for (int i = 0; i < selectedMenu.size(); i++) {
-                System.out.println(scheduledOrders.getOrderedMenu().get(i).getMenuName() + "      " + scheduledOrders.getOrderedMenuQty().get(i)
-                        + "     " + selectedMenu.get(i).getMenuPrice());
+                System.out.println(scheduledOrders.getOrderedMenu().get(i).getMenuName() + "           " + scheduledOrders.getOrderedMenuQty().get(i)
+                        + "           " + selectedMenu.get(i).getMenuPrice());
             }
-            System.out.println("Deliver Time    Deliver Address  Amount  GST  Delivery Fees   Subtotal");
-            System.out.println(scheduledOrders.getSelectedTime() + "         " + scheduledOrders.getDeliveryAddress()
-                    + "         " + scheduledOrders.getTotalAmount() + "  " + scheduledOrders.getGstAmount() + "  " + scheduledOrders.getDeliveryfees()
-                    + "  " + scheduledOrders.getSubtotal());
+            System.out.println("Deliver Time : " + scheduledOrders.getSelectedTime());
+            System.out.println("Deliver Address : " + scheduledOrders.getDeliveryAddress());
+            System.out.println("Amount: " + scheduledOrders.getTotalAmount());
+            System.out.println("GST : " + scheduledOrders.getGstAmount());
+            System.out.println("Delivery Fees: " + scheduledOrders.getDeliveryfees());
+            System.out.println("Subtotal: " + scheduledOrders.getSubtotal());
 
         } else {
             System.out.println("Thanks for using our system");
