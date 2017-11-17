@@ -14,6 +14,7 @@ import java.util.Date;
 
 public class Delivery {
 
+    private final static String[] month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     private String deliveryID;
     private Date deliveryDate;
     private Affiliates deliverySource;
@@ -100,6 +101,12 @@ public class Delivery {
     }
 
     public String displayDelivery() {
-        return String.format("%-10s\t%-20s\t%-30s\t%-30s\t%-10s\t%-10.2f", this.deliveryID, this.deliveryDate.toString(), this.deliverySource.getRestaurantName(), this.deliveryDestination.toString(), "Order ID", this.deliveryCharges);
+        String orderIDs = "";
+        
+        for (int i=0; i < orderList.size(); i++) {
+            orderIDs += orderList.get(i).getOrderID() + " ";
+        }
+            
+        return String.format("%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10.2f\n", this.deliveryID, this.deliveryDate.getDate() + " " + this.month[this.deliveryDate.getMonth()] + " " + this.deliveryDate.getYear(), this.deliverySource.getRestaurantName(), this.deliveryDestination.toString(), orderIDs, this.deliveryCharges);
     }
 }

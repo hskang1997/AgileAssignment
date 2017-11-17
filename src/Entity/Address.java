@@ -101,10 +101,10 @@ public class Address {
     }
     
     public String toString() {
-        if (!streetName2.isEmpty()) {
-            return unitNo + ", " + streetName1 + ", " + streetName2 + ", " + postcode + " " + area + ", " + state + ", " + country + ".";
+        if (!this.streetName2.isEmpty()) {
+            return this.unitNo + ", " + this.streetName1 + ", " + this.streetName2 + ", " + this.postcode + " " + this.area + ", " + this.state + ", " + this.country + ".";
         } else {
-            return unitNo + ", " + streetName1 + ", " + postcode + " " + area + ", " + state + ", " + country + ".";
+            return this.unitNo + ", " + this.streetName1 + ", " + this.postcode + " " + this.area + ", " + this.state + ", " + this.country + ".";
         }
     }
     

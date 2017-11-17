@@ -82,9 +82,9 @@ public class AssignDeliveryMan {
         orderList.add(order2);
         orderList.add(order3);
 
-        destination1 = new Address();
-        destination2 = new Address();
-        destination3 = new Address();
+        destination1 = new Address("215", "Taman Bunga Raya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        destination2 = new Address("190", "Taman Melati", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        destination3 = new Address("128", "Taman Wangsa", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
         
         delivery1 = new Delivery("L0001", deliveryDate, deliverySource, destination1, 4.90);
         delivery2 = new Delivery("L0002", deliveryDate, deliverySource, destination2, 2.50);
@@ -105,7 +105,7 @@ public class AssignDeliveryMan {
         
         // Display Delivery
         System.out.println("List of Delivery : ");
-        System.out.println(String.format("%-3s\t%-10s\t%-20s\t%-30s\t%-30s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
+        System.out.println(String.format("%-3s\t%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
 
         for (int i = 0; i < deliveryList.size(); i++) {
             System.out.print("" + (i + 1) + ". \t" + deliveryList.get(i).displayDelivery());
@@ -248,7 +248,7 @@ public class AssignDeliveryMan {
             System.out.println("======================================================================");
             System.out.println("" + (i + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryMan().displayDeliveryMan());
 
-            System.out.println(String.format("\t%-3s\t%-10s\t%-20s\t%-30s\t%-30s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
+            System.out.println(String.format("\t%-3s\t%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
             for (int j = 0; j < deliveryRecordList.get(i).getDeliveryRecords().size(); j++) {
                 System.out.println("\t=====================================================================================================================================================");
                 System.out.println("\t" + (j + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryRecords().get(j).displayDelivery());
