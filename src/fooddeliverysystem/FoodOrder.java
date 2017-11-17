@@ -173,7 +173,7 @@ public class FoodOrder {
                 foodOrder.add(order2);
 
             } else {
-                check = confirmation();
+                check = confirmation(); // check confirmation
 
             }
         } while (check == true);
@@ -181,7 +181,7 @@ public class FoodOrder {
         System.out.println("\nFood Name \t\t Quantity \t\t Price(RM)");
         System.out.println("\n========= \t\t ======== \t\t ========");
         for (int f = 0; f < foodOrder.size(); f++) {
-            System.out.println(foodOrder.get(f).toString());
+            System.out.println(foodOrder.get(f).toString()); // show order details
         }
         System.out.println(order.total());
 
