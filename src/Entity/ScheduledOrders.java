@@ -32,6 +32,19 @@ public class ScheduledOrders {
 
     }
 
+    public ScheduledOrders(String orderID, Date orderDateTime, String selectedTime, Address deliveryArea, String deliveryAddress, Affiliates restaurant, double totalAmount, double gstAmount, double deliveryfees, double subtotal) {
+        this.orderID = orderID;
+        this.orderDateTime = orderDateTime;
+        this.selectedTime = selectedTime;
+        this.deliveryArea = deliveryArea;
+        this.deliveryAddress = deliveryAddress;
+        this.restaurant = restaurant;
+        this.totalAmount = totalAmount;
+        this.gstAmount = gstAmount;
+        this.deliveryfees = deliveryfees;
+        this.subtotal = subtotal;
+    }
+
     public ScheduledOrders(String orderID, Date orderDate) {
         this.orderID = orderID;
         this.orderDateTime = orderDate;
