@@ -21,12 +21,12 @@ public class Menu {
     }
 
     // Constructor without menu status
-    public Menu(String menuID, String menuName, double menuPrice, Date dateAdded) {
-        this.menuID = menuID;
-        this.menuName = menuName;
-        this.menuPrice = menuPrice;
-        this.dateAdded = dateAdded;
-    }
+//    public Menu(String menuID, String menuName, double menuPrice, Date dateAdded) {
+//        this.menuID = menuID;
+//        this.menuName = menuName;
+//        this.menuPrice = menuPrice;
+//        this.dateAdded = dateAdded;
+//    }
 
     // Full
     public Menu(String menuID, String menuName, double menuPrice, boolean menuStatus, Date dateAdded) {

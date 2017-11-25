@@ -108,13 +108,13 @@ public class Customer {
     
     public String toString() {
         if (altAddress1 == null && altAddress2 == null) {
-            return "Customer Name: " + custName + "\n Customer Phone: " + custPhone + "\n Customer Email: " + custEmail + "\n Customer Address: " + custAddress.toString() + "\n";
+            return "\nCustomer Name: " + custName + "\nCustomer Phone: " + custPhone + "\nCustomer Email: " + custEmail + "\nCustomer Address: " + custAddress.toString() + "\n";
         } else if (altAddress2 == null) {
-            return "Customer Name: " + custName + "\n Customer Phone: " + custPhone + "\n Customer Email: " + custEmail + "\n Customer Address: " + custAddress.toString() + "\n Customer Alt Address 1: " + altAddress1.toString();
+            return "Customer Name: " + custName + "\nCustomer Phone: " + custPhone + "\nCustomer Email: " + custEmail + "\nCustomer Address: " + custAddress.toString() + "\nCustomer Alt Address 1: " + altAddress1.toString();
         } else if (custEmail.isEmpty()) {
-            return "Customer Name: " + custName + "\n Customer Phone: " + custPhone + "\n Customer Address: " + custAddress.toString() + "\n Customer Alt Address 1: " + altAddress1.toString() + "\n Customer Alt Address 2: " + altAddress2.toString();
+            return "Customer Name: " + custName + "\nCustomer Phone: " + custPhone + "\nCustomer Address: " + custAddress.toString() + "\nCustomer Alt Address 1: " + altAddress1.toString() + "\nCustomer Alt Address 2: " + altAddress2.toString();
         } else {
-            return "Customer Name: " + custName + "\n Customer Phone: " + custPhone + "\n Customer Email: " + custEmail + "\n Customer Address: " + custAddress.toString() + "\n Customer Alt Address 1: " + altAddress1.toString() + "\n Customer Alt Address 2: " + altAddress2.toString();
+            return "Customer Name: " + custName + "\nCustomer Phone: " + custPhone + "\nCustomer Email: " + custEmail + "\nCustomer Address: " + custAddress.toString() + "\nCustomer Alt Address 1: " + altAddress1.toString() + "\nCustomer Alt Address 2: " + altAddress2.toString();
         }
     }
 }
