@@ -21,9 +21,8 @@ public class addDeliveryMen {
         Address address = new Address();
         String working;
         char option,option2;
+        int a =0001;
 
-        System.out.println("Please enter delivery men ID:");
-        deliveryMen.setDeliveryManID(scanner.nextLine());
         System.out.println("Please enter delivery men name:");
         deliveryMen.setName(scanner.nextLine());
         System.out.println("Please enter delivery men email:");
@@ -60,11 +59,13 @@ public class addDeliveryMen {
 
             if (working.compareTo("1") == 0) {
                 deliveryMen.setWorkingStatus("Full time");
+                deliveryMen.setDeliveryManID("STA"+ String.format("%03d", a));
+                a++;
             } else if (working.compareTo("2") == 0) {
                 deliveryMen.setWorkingStatus("Part Time");
-            } //        else if(working ==3){
-            //             DeliveryMen.setWorkingStatus("Leave");
-            //        }
+                deliveryMen.setDeliveryManID("STA"+ String.format("%03d", a));
+                b++;
+            }
             else {
                 System.out.println("Invalid Option.Please try again.");
             }
@@ -102,6 +103,7 @@ public class addDeliveryMen {
                 } while (!(option == 'n' || option == 'N' || option == 'y' || option == 'Y'));
             } else if (confirm == 'n' || confirm == 'N') {
                 delivery.remove(deliveryMen);
+                a--;
                 do{
                 System.out.println("Do you wish to continue? (Y/N)");
                     option2 = scanner.next().charAt(0);
