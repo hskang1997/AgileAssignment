@@ -20,14 +20,13 @@ public class DeliveryMenAttendence {
     private final String WORKING = "Working";
     private final String BREAK = "Break";
 
-    private final String IN = "IN";
-    private final String OUT = "OUT";
+//    private final String IN = "IN";
+//    private final String OUT = "OUT";
 
     private Scanner scan = new Scanner(System.in);
 
     private DeliveryMan men = new DeliveryMan();
     private Attendence menAttendence = new Attendence();
-    private String currentState = "";
 
     public DeliveryMenAttendence() {
 
@@ -40,11 +39,11 @@ public class DeliveryMenAttendence {
     }
 
     public boolean clockIn(Date clockInDate) {
-
-        if (currentState.compareTo(IN) != 0) {
+        System.out.println("RESULTS : " + men.getWorkingStatus());
+        if (men.getWorkingStatus().compareTo(WORKING) != 0) {
             menAttendence.addClockIn(clockInDate);
             men.setWorkingStatus(this.WORKING);
-            currentState = IN;
+//            currentState = IN;
 
             return true;
 
@@ -55,11 +54,9 @@ public class DeliveryMenAttendence {
     }
 
     public boolean clockOut(Date clockOutDate) {
-
-        if (currentState.compareTo(OUT) != 0) {
+        if (men.getWorkingStatus().compareTo(BREAK) != 0) {
             menAttendence.addClockOut(clockOutDate);
             men.setWorkingStatus(this.BREAK);
-            currentState = OUT;
 
             return true;
 
@@ -131,11 +128,11 @@ public class DeliveryMenAttendence {
         System.out.println(menAttendence.getPerson().getDeliveryManID());
 
         for (Date clockIn : menAttendence.getClockIn()) {
-            System.out.println("IN: " + clockIn.getTime());
+            System.out.println("IN: " + clockIn.getHours() + ":" + clockIn.getMinutes() + ":" + clockIn.getSeconds());
         }
-        
+
         for (Date clockOut : menAttendence.getClockOut()) {
-            System.out.println("OUT: " + clockOut.getTime());
+            System.out.println("OUT: " + clockOut.getHours() + ":" + clockOut.getMinutes() + ":" + clockOut.getSeconds());
         }
     }
 

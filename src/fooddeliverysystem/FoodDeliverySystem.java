@@ -37,10 +37,10 @@ public class FoodDeliverySystem {
         System.out.println("\n *** Main Menu *** \n");
         System.out.println("1. Assign Delivery to Delivery Man");
         System.out.println("2. Delivery Man Attendence");
-        System.out.println("0. Exit\n");
+        System.out.println("0. Exit");
 
         do {
-            System.out.print("\nChoose your menu option : ");
+            System.out.print("Choose your menu option : ");
 
             try {
                 result = scan.nextInt();
@@ -95,8 +95,10 @@ public class FoodDeliverySystem {
     public String readInDeliveryMen() {
         String deliveryMenID = "";
         
-        System.out.print("\n Your Delivery Men ID (0 to exit): ");
+        System.out.print("\nYour Delivery Men ID (0 to exit): ");
         deliveryMenID = scan.next();
+        
+        System.out.println("INPUT: " + deliveryMenID);
         
         // Have to do checking on symbol
         
@@ -205,14 +207,14 @@ public class FoodDeliverySystem {
                     break;
                     
                 case 2:
-                    String deliveryMenID;
                     DeliveryMan deliveryMan = null;
                     boolean loop = false;
                     
                     do {
-                        deliveryMenID = fds.readInDeliveryMen();
+                        String deliveryMenID = fds.readInDeliveryMen();
                         
-                        if (deliveryMenID.compareTo("0") != 0) {
+                        System.out.println("INPUT: " + deliveryMenID);
+                        if (deliveryMenID.length()>1 && Integer.parseInt(deliveryMenID) != 0) {
                             deliveryMan = fds.checkDeliveryMen(deliveryMenID, deliveryManList);
                             
                             if (deliveryMan == null) {
@@ -230,7 +232,6 @@ public class FoodDeliverySystem {
                         DeliveryMenAttendence attendence = new DeliveryMenAttendence(deliveryMan);
                         response = fds.continueMsg();
                     }
-                    System.out.println(deliveryMan.getWorkingStatus() + "\n" +deliveryMan.getDeliveryManID());
                     break;
 
                 default:
