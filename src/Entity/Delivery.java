@@ -23,6 +23,8 @@ public class Delivery {
     private ArrayList<Order> orderList = new ArrayList<Order>();
     private double deliveryCharges;
     private String deliveryStatus;
+    private DeliveryMan deliveryMan;
+    private ScheduledOrders so;
 
     // Empty Constructor
     public Delivery() {
@@ -37,6 +39,30 @@ public class Delivery {
         this.deliveryDestination = deliveryDestination;
         this.deliveryCharges = deliveryCharges;
         this.deliveryStatus = PENDING;
+    }
+    
+    public Delivery(String deliveryID, DeliveryMan deliveryMan, Affiliates deliverySource, Address deliveryDestination, ScheduledOrders so) {
+        this.deliveryID = deliveryID;
+        this.deliveryMan = deliveryMan;
+        this.deliverySource = deliverySource;
+        this.deliveryDestination = deliveryDestination;
+        this.so = so;
+    }
+
+    public DeliveryMan getDeliveryMan() {
+        return deliveryMan;
+    }
+
+    public void setDeliveryMan(DeliveryMan deliveryMan) {
+        this.deliveryMan = deliveryMan;
+    }
+
+    public ScheduledOrders getSo() {
+        return so;
+    }
+
+    public void setSo(ScheduledOrders so) {
+        this.so = so;
     }
 
     public String getDeliveryID() {

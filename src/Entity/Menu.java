@@ -5,7 +5,6 @@
  */
 package Entity;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Menu {
@@ -37,9 +36,9 @@ public class Menu {
         this.dateAdded = dateAdded;
     }
 
-    Menu(String m001, String ramen, double d, Calendar cal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public Menu(String m001, String ramen, double d, Calendar cal) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public String getMenuID() {
         return menuID;

@@ -21,6 +21,7 @@ public class ScheduledOrders {
     private int selectedTimeFrame;
     private String selectedTime;
     private Address deliveryArea;
+    private Address address;
     private String deliveryAddress;
     private Affiliates restaurant;
     private double totalAmount; // exclude gst amount
@@ -32,9 +33,30 @@ public class ScheduledOrders {
 
     }
 
+    public ScheduledOrders(String orderID, Date orderDateTime, String selectedTime, Address deliveryArea, String deliveryAddress, Affiliates restaurant, double totalAmount, double gstAmount, double deliveryfees, double subtotal) {
+        this.orderID = orderID;
+        this.orderDateTime = orderDateTime;
+        this.selectedTime = selectedTime;
+        this.deliveryArea = deliveryArea;
+        this.deliveryAddress = deliveryAddress;
+        this.restaurant = restaurant;
+        this.totalAmount = totalAmount;
+        this.gstAmount = gstAmount;
+        this.deliveryfees = deliveryfees;
+        this.subtotal = subtotal;
+    }
+
     public ScheduledOrders(String orderID, Date orderDate) {
         this.orderID = orderID;
         this.orderDateTime = orderDate;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public double getDeliveryfees() {

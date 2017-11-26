@@ -146,13 +146,17 @@ public class FoodDeliverySystem {
         Vehicle vehicle = new Vehicle("Honda", "ABC 1234", "May 2012");
         
         Address address = new Address("135", "Taman Kaya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        Address address1 = new Address("123", "Taman ABC", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        Address address2 = new Address("456", "Taman DEF", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        Address address3 = new Address("789", "Taman GHI", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+        Address address4 = new Address("246", "Taman XYZ", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
         
         Affiliates deliverySource = new Affiliates("Kelvin Tan", "600121021263", "User1", "abc123", "R0001", "Western Food Restaurant", "012-3456789", address, "western@gmail.com");
         
-        DeliveryMan man1 = new DeliveryMan("S0001", "Jason", "750303075313", "012-3456789", "123, Jalan ABC, 11200 Penang.", "jason@gmail.com", vehicle, WORKING, "Available");
-        DeliveryMan man2 = new DeliveryMan("S0002", "David", "850512025411", "013-3456789", "456, Jalan DEF, 53300 KL.", "daivd@hotmail.com", vehicle, BREAK, "Not Available");
-        DeliveryMan man3 = new DeliveryMan("S0003", "John", "781013016315", "016-3456789", "789, Jalan GHI, 30200 Perak.", "john@yahoo.com", vehicle, WORKING, "Delivering");
-        DeliveryMan man4 = new DeliveryMan("S0004", "Kelvin", "901220101317", "017-3456789", "246, Jalan XYZ, 53430 KL.", "kelvin@live.com", vehicle, WORKING, "Available");
+        DeliveryMan man1 = new DeliveryMan("S0001", "Jason", "750303075313", "012-3456789", address1, "jason@gmail.com", vehicle, WORKING, "Available");
+        DeliveryMan man2 = new DeliveryMan("S0002", "David", "850512025411", "013-3456789", address2, "daivd@hotmail.com", vehicle, BREAK, "Not Available");
+        DeliveryMan man3 = new DeliveryMan("S0003", "John", "781013016315", "016-3456789", address3, "john@yahoo.com", vehicle, WORKING, "Delivering");
+        DeliveryMan man4 = new DeliveryMan("S0004", "Kelvin", "901220101317", "017-3456789", address4, "kelvin@live.com", vehicle, WORKING, "Available");
         
         Address destination1 = new Address("215", "Taman Bunga Raya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
         Address destination2 = new Address("190", "Taman Melati", 55333, "Setapak", "Kuala Lumpur", "Malaysia");

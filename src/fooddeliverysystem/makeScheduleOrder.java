@@ -21,7 +21,7 @@ public class makeScheduleOrder {
     Scanner scan = new Scanner(System.in);
     Scanner stringScan = new Scanner(System.in);
     Scanner scan1 = new Scanner(System.in);
-    String defaultOrderID = "SO1000";
+    String defaultOrderID = "SO0001";
     int orderID = Integer.parseInt(defaultOrderID.substring(2));
     String nextOrderID = "S0" + orderID + 1;
     Address restaurantAddress1 = new Address("L032", "Jalan Danau Jaya 1", 13500, "Setapak", "Kuala Lumpur", "Malaysia");
@@ -423,14 +423,14 @@ public class makeScheduleOrder {
         System.out.println("Deliver Time : " + scheduledOrders.getSelectedTime());
         System.out.println("Deliver Address : " + scheduledOrders.getDeliveryAddress());
         System.out.println("Amount: " + scheduledOrders.getTotalAmount());
-        System.out.println("GST : " + scheduledOrders.getGstAmount());
+        System.out.println("GST : " + String.format("%.2f",scheduledOrders.getGstAmount()));
         System.out.println("Delivery Fees: " + scheduledOrders.getDeliveryfees());
         System.out.println("Subtotal: " + scheduledOrders.getSubtotal());
 
         System.out.println();
 
         do {
-            System.out.print("Are you sure you want to place schedule order? [y/n]");
+            System.out.print("Are you sure you want to place schedule order? [y/n] >");
             confirm = scan1.next();
             valid = check(confirm);
             if (valid == false) {
@@ -456,9 +456,13 @@ public class makeScheduleOrder {
             System.out.println("Deliver Time : " + scheduledOrders.getSelectedTime());
             System.out.println("Deliver Address : " + scheduledOrders.getDeliveryAddress());
             System.out.println("Amount: " + scheduledOrders.getTotalAmount());
-            System.out.println("GST : " + scheduledOrders.getGstAmount());
+            System.out.println("GST : " + String.format("%.2f",scheduledOrders.getGstAmount()));
             System.out.println("Delivery Fees: " + scheduledOrders.getDeliveryfees());
             System.out.println("Subtotal: " + scheduledOrders.getSubtotal());
+            System.out.println();
+            System.out.println("Thanks for using our system");
+            DeliveryScheduled ds = new DeliveryScheduled();
+            ds.createDeliverySchedule(listScheduleOrders);
 
         } else {
             System.out.println("Thanks for using our system");

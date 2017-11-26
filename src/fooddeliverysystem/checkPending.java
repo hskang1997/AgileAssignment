@@ -1,4 +1,4 @@
-package FoodDeliverySystem;
+package fooddeliverysystem;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,7 +30,7 @@ public class checkPending {
         int i;
         int a=1;
         
-        delivery.setDeliveryID("121314");
+        delivery.setDeliveryID("DM001");
         
         //set address
         address.setUnitNo("59");
@@ -48,7 +48,7 @@ public class checkPending {
         record.addDeliveryRecords(delivery);
         
         //Problem here. How to get orderID
-        order.setOrderID("111111");
+        order.setOrderID("ORD111111");
         orderList.add(order);
         delivery.setOrderList(orderList);
         delivery.addOrderList(order);
