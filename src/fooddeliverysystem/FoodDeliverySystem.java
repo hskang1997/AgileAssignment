@@ -7,6 +7,7 @@ package fooddeliverysystem;
 
 import Entity.Address;
 import Entity.Affiliates;
+import Entity.Attendence;
 import Entity.Delivery;
 import Entity.DeliveryMan;
 import Entity.Menu;
@@ -40,7 +41,7 @@ public class FoodDeliverySystem {
         System.out.println("0. Exit");
 
         do {
-            System.out.print("Choose your menu option : ");
+            System.out.print("\nChoose your menu option : ");
 
             try {
                 result = scan.nextInt();
@@ -69,7 +70,7 @@ public class FoodDeliverySystem {
         boolean result = true, valid;
 
         do {
-            System.out.print("Do you wish to continue ? (Y/N)");
+            System.out.print("\n\nDo you wish to continue ? (Y/N)");
             char response = scan.next().charAt(0);
 
             if (response == 'Y' | response == 'y') {
@@ -95,28 +96,26 @@ public class FoodDeliverySystem {
     public String readInDeliveryMen() {
         String deliveryMenID = "";
         
-        System.out.print("\nYour Delivery Men ID (0 to exit): ");
+        System.out.print("\nEnter Your Delivery Men ID (0 to exit): ");
         deliveryMenID = scan.next();
-        
-        System.out.println("INPUT: " + deliveryMenID);
         
         // Have to do checking on symbol
         
         return deliveryMenID;
     }
     
-    public DeliveryMan checkDeliveryMen(String deliveryMenID, ArrayList<DeliveryMan> deliveryManList) {
+    public Attendence checkDeliveryMen(String deliveryMenID, ArrayList<Attendence> deliveryManAttendence) {
         
-        DeliveryMan deliveryMan = null;
+        Attendence attendence = null;
         
-        for (int i=0; i < deliveryManList.size(); i++) {
-            if (deliveryManList.get(i).getDeliveryManID().compareTo(deliveryMenID) == 0) {
-                deliveryMan = deliveryManList.get(i);
+        for (int i=0; i < deliveryManAttendence.size(); i++) {
+            if (deliveryManAttendence.get(i).getPerson().getDeliveryManID().compareTo(deliveryMenID) == 0) {
+                attendence = deliveryManAttendence.get(i);
                 break;
             }
         }
         
-        return deliveryMan;
+        return attendence;
     }
 
     /**
@@ -171,18 +170,37 @@ public class FoodDeliverySystem {
         delivery2.addOrderList(order2);
         delivery3.addOrderList(order3);
         
-        ArrayList<DeliveryMan> deliveryManList = new ArrayList<DeliveryMan>();
+        Attendence menAttendence1 = new Attendence(man1);
+        menAttendence1.addClockIn(new Date("11/26/2017 9:50:25"));
+        
+        Attendence menAttendence2 = new Attendence(man2);
+        menAttendence2.addClockIn(new Date("11/26/2017 9:40:19"));
+        menAttendence2.addClockOut(new Date("11/26/2017 12:00:20"));
+        
+        Attendence menAttendence3 = new Attendence(man3);
+        menAttendence3.addClockIn(new Date("11/26/2017 9:55:10"));
+        
+        Attendence menAttendence4 = new Attendence(man4);
+        menAttendence4.addClockIn(new Date("11/26/2017 9:59:40"));
+        
+        ArrayList<DeliveryMan> deliveryManList = new ArrayList<>();
         deliveryManList.add(man1);
         deliveryManList.add(man2);
         deliveryManList.add(man3);
         deliveryManList.add(man4);
         
-        ArrayList<Order> orderList = new ArrayList<Order>();
+        ArrayList<Attendence> deliveryManAttendence = new ArrayList<>();
+        deliveryManAttendence.add(menAttendence1);
+        deliveryManAttendence.add(menAttendence2);
+        deliveryManAttendence.add(menAttendence3);
+        deliveryManAttendence.add(menAttendence4);
+        
+        ArrayList<Order> orderList = new ArrayList<>();
         orderList.add(order1);
         orderList.add(order2);
         orderList.add(order3);
         
-        ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
+        ArrayList<Delivery> deliveryList = new ArrayList<>();
         deliveryList.add(delivery1);
         deliveryList.add(delivery2);
         deliveryList.add(delivery3);
@@ -207,15 +225,14 @@ public class FoodDeliverySystem {
                     break;
                     
                 case 2:
-                    DeliveryMan deliveryMan = null;
+                    Attendence deliveryMan = null;
                     boolean loop = false;
                     
                     do {
                         String deliveryMenID = fds.readInDeliveryMen();
                         
-                        System.out.println("INPUT: " + deliveryMenID);
-                        if (deliveryMenID.length()>1 && Integer.parseInt(deliveryMenID) != 0) {
-                            deliveryMan = fds.checkDeliveryMen(deliveryMenID, deliveryManList);
+                        if (deliveryMenID.compareTo("0") != 0) {
+                            deliveryMan = fds.checkDeliveryMen(deliveryMenID, deliveryManAttendence);
                             
                             if (deliveryMan == null) {
                                 loop = true;

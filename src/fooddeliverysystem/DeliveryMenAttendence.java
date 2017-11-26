@@ -6,7 +6,6 @@
 package fooddeliverysystem;
 
 import Entity.Attendence;
-import Entity.DeliveryMan;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
@@ -25,25 +24,21 @@ public class DeliveryMenAttendence {
 
     private Scanner scan = new Scanner(System.in);
 
-    private DeliveryMan men = new DeliveryMan();
     private Attendence menAttendence = new Attendence();
 
     public DeliveryMenAttendence() {
 
     }
 
-    public DeliveryMenAttendence(DeliveryMan deliveryMan) {
-        this.men = deliveryMan;
-        menAttendence.setPerson(men);
+    public DeliveryMenAttendence(Attendence menAttendence) {
+        this.menAttendence = menAttendence;
         initialize();
     }
 
     public boolean clockIn(Date clockInDate) {
-        System.out.println("RESULTS : " + men.getWorkingStatus());
-        if (men.getWorkingStatus().compareTo(WORKING) != 0) {
+        if (menAttendence.getPerson().getWorkingStatus().compareTo(WORKING) != 0) {
             menAttendence.addClockIn(clockInDate);
-            men.setWorkingStatus(this.WORKING);
-//            currentState = IN;
+            menAttendence.getPerson().setWorkingStatus(this.WORKING);
 
             return true;
 
@@ -54,9 +49,9 @@ public class DeliveryMenAttendence {
     }
 
     public boolean clockOut(Date clockOutDate) {
-        if (men.getWorkingStatus().compareTo(BREAK) != 0) {
+        if (menAttendence.getPerson().getWorkingStatus().compareTo(BREAK) != 0) {
             menAttendence.addClockOut(clockOutDate);
-            men.setWorkingStatus(this.BREAK);
+            menAttendence.getPerson().setWorkingStatus(this.BREAK);
 
             return true;
 
@@ -109,13 +104,19 @@ public class DeliveryMenAttendence {
                 case 1:
                     Date clockInDate = Calendar.getInstance().getTime();
                     success = this.clockIn(clockInDate);
-                    displayAttendence();
+                    if (success) {
+                        System.out.println("\nYou had Clock In on " + clockInDate.getDate() + "/" + (clockInDate.getMonth()+1) + "/" + (clockInDate.getYear()+1900) + " at " + clockInDate.getHours() + ":" + clockInDate.getMinutes() + ":" + clockInDate.getSeconds());
+                        displayAttendence();
+                    }
                     break;
 
                 case 2:
                     Date clockOutDate = Calendar.getInstance().getTime();
                     success = this.clockOut(clockOutDate);
-                    displayAttendence();
+                    if (success) {
+                        System.out.println("\nYou had Clock Out on " + clockOutDate.getDate() + "/" + (clockOutDate.getMonth()+1) + "/" + (clockOutDate.getYear()+1900) + " at " + clockOutDate.getHours() + ":" + clockOutDate.getMinutes() + ":" + clockOutDate.getSeconds());
+                        displayAttendence();
+                    }
                     break;
 
                 default:
@@ -125,14 +126,19 @@ public class DeliveryMenAttendence {
     }
 
     private void displayAttendence() {
-        System.out.println(menAttendence.getPerson().getDeliveryManID());
+        
+        System.out.println("\n Attendence Today ");
+        System.out.println("==================");
+        System.out.println("Your Delivery Men ID: " + menAttendence.getPerson().getDeliveryManID());
 
+        System.out.print("\nIN: ");
         for (Date clockIn : menAttendence.getClockIn()) {
-            System.out.println("IN: " + clockIn.getHours() + ":" + clockIn.getMinutes() + ":" + clockIn.getSeconds());
+            System.out.print(clockIn.getHours() + ":" + clockIn.getMinutes() + ":" + clockIn.getSeconds() + "\t");
         }
 
+        System.out.print("\nOUT: ");
         for (Date clockOut : menAttendence.getClockOut()) {
-            System.out.println("OUT: " + clockOut.getHours() + ":" + clockOut.getMinutes() + ":" + clockOut.getSeconds());
+            System.out.print(clockOut.getHours() + ":" + clockOut.getMinutes() + ":" + clockOut.getSeconds() + "\t");
         }
     }
 

@@ -14,8 +14,8 @@ import java.util.Date;
  */
 public class Attendence {
     
-    private ArrayList<Date> clockIn = new ArrayList<Date>();
-    private ArrayList<Date> clockOut = new ArrayList<Date>();
+    private ArrayList<Date> clockIn = new ArrayList<>();
+    private ArrayList<Date> clockOut = new ArrayList<>();
     private DeliveryMan person = new DeliveryMan();
     
     public Attendence() {
