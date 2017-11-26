@@ -18,6 +18,7 @@ public class Address {
     private String area;
     private String state;
     private String country;
+    private String address;
 
     // Empty Constructor
     public Address() {
@@ -31,6 +32,7 @@ public class Address {
         this.area = area;
         this.state = state;
         this.country = country;
+        address = unitNo + ", " + this.streetName1 + ", " + this.postcode + " " + this.area + ", " + this.state + ", " + this.country + ".";
     }
 
     // Full
@@ -42,6 +44,20 @@ public class Address {
         this.area = area;
         this.state = state;
         this.country = country;
+        address = unitNo + ", " + this.streetName1 + ", " + this.streetName2 + ", " + this.postcode + " " + this.area + ", " + this.state + ", " + this.country + ".";
+    }
+    
+    public Address(String address, String area) {
+        this.address= address;
+        this.area = area;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getUnitNo() {

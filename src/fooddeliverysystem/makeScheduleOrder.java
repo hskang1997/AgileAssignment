@@ -21,7 +21,7 @@ public class makeScheduleOrder {
     Scanner scan = new Scanner(System.in);
     Scanner stringScan = new Scanner(System.in);
     Scanner scan1 = new Scanner(System.in);
-    String defaultOrderID = "SO1000";
+    String defaultOrderID = "SO0001";
     int orderID = Integer.parseInt(defaultOrderID.substring(2));
     String nextOrderID = "S0" + orderID + 1;
     Address restaurantAddress1 = new Address("L032", "Jalan Danau Jaya 1", 13500, "Setapak", "Kuala Lumpur", "Malaysia");

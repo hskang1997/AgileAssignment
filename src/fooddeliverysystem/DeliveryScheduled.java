@@ -1,6 +1,7 @@
 package fooddeliverysystem;
 
 import Entity.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,6 +19,7 @@ public class DeliveryScheduled {
     Address address3 = new Address("D-215", "Jalan Lang Lama 2", 13500, "Klang", "Kuala Lumpur", "Malaysia");
     Affiliates restaurant3 = new Affiliates("Koh", "901212-02-9875", "Mcdonald123", "5201314", "Mcdonald", "AS0335680-V", "012-3456789", address3, "Mcdonald@gmail.com");
     ScheduledOrders so = new ScheduledOrders("SO0000", date, "8:00 PM", address1, "12, Lorong Hati 3, Setapak", restaurant3, 12, 0.72, 5, 17.72);
+    List<Delivery> listDelivery = new ArrayList<>();
 
     public static void main(String[] args) {
         DeliveryScheduled ds = new DeliveryScheduled();
@@ -31,6 +33,8 @@ public class DeliveryScheduled {
         System.out.println("Schedule Orders");
         if (orderList.isEmpty()) {
             System.out.println("Currently There are no scheduled orders.");
+            checkScheduleDeliver checkSD = new checkScheduleDeliver();
+            checkSD.viewDelivery(listDelivery);
         } else {
             int index = orderList.size() - 1;
             System.out.println();
@@ -45,7 +49,8 @@ public class DeliveryScheduled {
             delivery = new Delivery("Dil0001", delierMan, orderList.get(index).getRestaurant(), address, so);
             System.out.println("Current Schedule: ");
             System.out.println("Time \t\t Destination Area \t Restaurant");
-            System.out.println(delivery.getSo().getSelectedTime() + "\t\t" + delivery.getDeliveryDestination().getArea() + "\t\t\t"+ delivery.getDeliverySource().getRestaurantName());
+            System.out.println(delivery.getSo().getSelectedTime() + "\t\t" + delivery.getDeliveryDestination().getArea() + "\t\t\t" + delivery.getDeliverySource().getRestaurantName());
+            listDelivery.add(delivery);
 
             do {
                 try {
@@ -59,11 +64,11 @@ public class DeliveryScheduled {
                     check = true;
 
                 }
-                if(delManID !=1){
+                if (delManID != 1) {
                     System.out.println("Please enter integer values within the range only.");
                 }
             } while (check == true || delManID != 1);
-            
+
             if (delivery.getSo().getSelectedTime().equals(orderList.get(index).getSelectedTime())) {
                 if (delivery.getDeliveryDestination().getArea().equals(orderList.get(index).getDeliveryArea().getArea())) {
 
@@ -78,6 +83,10 @@ public class DeliveryScheduled {
 
                     if (decision.equals("y") || decision.equals("Y")) {
                         System.out.println("This order is succesfully scheduled");
+                        Address address = new Address(orderList.get(index).getDeliveryAddress(), orderList.get(index).getDeliveryArea().getArea());
+                        orderList.get(index).setAddress(address);
+                        Delivery newDelivery = new Delivery("Dil0002", delierMan, orderList.get(index).getRestaurant(), orderList.get(index).getAddress(), orderList.get(index));
+                        listDelivery.add(newDelivery);
                         orderList.remove(index);
 
                         do {
@@ -93,6 +102,8 @@ public class DeliveryScheduled {
                             createDeliverySchedule(orderList);
                         } else {
                             System.out.println("Thanks for using our system.");
+                            checkScheduleDeliver checkSD = new checkScheduleDeliver();
+                            checkSD.viewDelivery(listDelivery);
                         }
 
                     } else {
@@ -113,7 +124,11 @@ public class DeliveryScheduled {
                 } while (valid == false);
                 if (decision.equals("y") || decision.equals("Y")) {
                     System.out.println("This order is succesfully scheduled");
-                    orderList.remove(index);
+                    Address address = new Address(orderList.get(index).getDeliveryAddress(), orderList.get(index).getDeliveryArea().getArea());
+                    orderList.get(index).setAddress(address);
+                    Delivery newDelivery = new Delivery("Dil0002", delierMan, orderList.get(index).getRestaurant(), orderList.get(index).getAddress(), orderList.get(index));
+                    listDelivery.add(newDelivery);
+                    orderList.remove(index);;
 
                     do {
                         System.out.println("Do you want to continue in scheduling the order?[y/n]");
@@ -128,6 +143,8 @@ public class DeliveryScheduled {
                         createDeliverySchedule(orderList);
                     } else {
                         System.out.println("Thanks for using our system.");
+                        checkScheduleDeliver checkSD = new checkScheduleDeliver();
+                        checkSD.viewDelivery(listDelivery);
                     }
 
                 } else {
