@@ -14,6 +14,7 @@ import java.util.Date;
 
 public class Delivery {
 
+    private final static String PENDING = "Pending";
     private final static String[] month = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
     private String deliveryID;
     private Date deliveryDate;
@@ -21,11 +22,13 @@ public class Delivery {
     private Address deliveryDestination;
     private ArrayList<Order> orderList = new ArrayList<Order>();
     private double deliveryCharges;
+    private String deliveryStatus;
     private DeliveryMan deliveryMan;
     private ScheduledOrders so;
 
     // Empty Constructor
     public Delivery() {
+        this.deliveryStatus = PENDING;
     }
 
     // Full
@@ -35,7 +38,9 @@ public class Delivery {
         this.deliverySource = deliverySource;
         this.deliveryDestination = deliveryDestination;
         this.deliveryCharges = deliveryCharges;
+        this.deliveryStatus = PENDING;
     }
+    
     public Delivery(String deliveryID, DeliveryMan deliveryMan, Affiliates deliverySource, Address deliveryDestination, ScheduledOrders so) {
         this.deliveryID = deliveryID;
         this.deliveryMan = deliveryMan;
@@ -110,6 +115,14 @@ public class Delivery {
 
     public void setDeliveryCharges(double deliveryCharges) {
         this.deliveryCharges = deliveryCharges;
+    }
+
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 
     public String displayOrderList() {

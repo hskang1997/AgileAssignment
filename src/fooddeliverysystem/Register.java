@@ -245,7 +245,7 @@ public class Register {
 
         } while (chkLogin == false);
         System.out.println("Welcome " + ownerName);
-        System.exit(-1);
+        new FoodManagement();
 
     }
 
@@ -255,6 +255,7 @@ public class Register {
             for (int i = 0; i < affiliatesList.size(); i++) {
                 if (affiliatesList.get(i).getUserName().compareTo(username) == 0 && affiliatesList.get(i).getPassword().compareTo(pass) == 0) {
                     ownerName = affiliatesList.get(i).getOwnerName();
+                    
                     check = true;
                     break;
                 } else {

@@ -15,7 +15,7 @@ public class DeliveryMan {
     private String name;
     private String icNo;
     private String phone;
-    private String homeAddress;
+    private Address homeAddress;
     private String email;
     private Vehicle vehicle;
     private String workingStatus; // Eg: retired, fired, ...
@@ -26,7 +26,7 @@ public class DeliveryMan {
     }
 
     // Full
-    public DeliveryMan(String deliveryManID, String name, String icNo, String phone, String homeAddress, String email, Vehicle vehicle, String workingStatus, String deliveryStatus) {
+    public DeliveryMan(String deliveryManID, String name, String icNo, String phone, Address homeAddress, String email, Vehicle vehicle, String workingStatus, String deliveryStatus) {
         this.deliveryManID = deliveryManID;
         this.name = name;
         this.icNo = icNo;
@@ -70,11 +70,11 @@ public class DeliveryMan {
         this.phone = phone;
     }
 
-    public String getHomeAddress() {
+    public Address getHomeAddress() {
         return homeAddress;
     }
 
-    public void setHomeAddress(String homeAddress) {
+    public void setHomeAddress(Address homeAddress) {
         this.homeAddress = homeAddress;
     }
 
