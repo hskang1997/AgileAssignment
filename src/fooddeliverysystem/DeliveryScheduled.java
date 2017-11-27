@@ -46,7 +46,7 @@ public class DeliveryScheduled {
             delierMan.setDeliveryManID("D001");
             System.out.println("Delivery Man");
             System.out.println("1 : " + delierMan.getDeliveryManID());
-            delivery = new Delivery("Dil0001", delierMan, orderList.get(index).getRestaurant(), address, so);
+            delivery = new Delivery("Dil0001", delierMan, restaurant3, address, so);
             System.out.println("Current Schedule: ");
             System.out.println("Time \t\t Destination Area \t Restaurant");
             System.out.println(delivery.getSo().getSelectedTime() + "\t\t" + delivery.getDeliveryDestination().getArea() + "\t\t\t" + delivery.getDeliverySource().getRestaurantName());
