@@ -52,6 +52,7 @@ public class Report {
         record.add(deliveryRecord2);
         record.add(deliveryRecord3);
         
+        System.out.println("\t\t\t\t\t\tDATE: 1/12/2017 Daily Report");
         System.out.println("____________________________________________________________________________________________________________________________________");
         System.out.println("Delivery Men ID\t\tDelivery Men Name\tTotal Deliveries Complete\tTotal Distance Travelled(KM)");
         System.out.println("____________________________________________________________________________________________________________________________________");
