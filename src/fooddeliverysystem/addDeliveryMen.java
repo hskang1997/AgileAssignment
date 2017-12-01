@@ -64,7 +64,7 @@ public class addDeliveryMen {
             } else if (working.compareTo("2") == 0) {
                 deliveryMen.setWorkingStatus("Part Time");
                 deliveryMen.setDeliveryManID("STA"+ String.format("%03d", a));
-                b++;
+                a++;
             }
             else {
                 System.out.println("Invalid Option.Please try again.");
