@@ -9,12 +9,10 @@ package fooddeliverysystem;
  *
  * @author goh
  */
-import Entity.Delivery;
+
 import Entity.DeliveryMan;
 import Entity.DeliveryRecord;
-import Entity.Order;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Report {
     

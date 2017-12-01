@@ -5,16 +5,10 @@
  */
 package fooddeliverysystem;
 
-import Entity.Address;
-import Entity.Affiliates;
 import Entity.Delivery;
 import Entity.DeliveryMan;
 import Entity.DeliveryRecord;
-import Entity.Menu;
-import Entity.Order;
-import Entity.Vehicle;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -23,92 +17,42 @@ import java.util.Scanner;
  */
 public class AssignDeliveryMan {
 
-    private static String DELIVERING_STATUS = "Delivering";
-    private static String AVAILABLE_STATUS = "Available";
-    private static String NOTAVAILABLE_STATUS = "Not Available";
+    private final static String DELIVERING_STATUS = "Delivering";
+    private final static String AVAILABLE_STATUS = "Available";
+    private final static String NOTAVAILABLE_STATUS = "Not Available";
+    private final static String WORKING = "Working";
+    private final static String BREAK = "Break";
+    private final static String PENDING = "Pending";
+    private final static String DELIVERING = "Delivering";
 
     private Scanner scan = new Scanner(System.in);
-    
-    private Date dateAdded = new Date(2017, 1, 1);
-    private Date deliveryDate = new Date(2017, 11, 3);
 
-    private Address address, destination1, destination2, destination3;
-    private Affiliates deliverySource;
-    private ArrayList<Order> orderList = new ArrayList<Order>();
     private ArrayList<Delivery> deliveryList = new ArrayList<Delivery>();
     private ArrayList<DeliveryMan> deliveryManList = new ArrayList<DeliveryMan>();
+    private ArrayList<Delivery> availableDelivery = new ArrayList<Delivery>();
     private ArrayList<DeliveryMan> availableDeliveryMan = new ArrayList<DeliveryMan>();
     private ArrayList<DeliveryRecord> deliveryRecordList = new ArrayList<DeliveryRecord>();
-    private Menu menu1, menu2, menu3;
-    private Order order1, order2, order3;
-    private Delivery delivery1, delivery2, delivery3;
-    private DeliveryMan man1, man2, man3, man4;
-    private Vehicle vehicle = new Vehicle("Honda", "ABC 1234", "May 2012");
+    
     private boolean failed = true;
 
-    public AssignDeliveryMan() {
-
-        address = new Address("135", "Taman Kaya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
-        deliverySource = new Affiliates("Kelvin Tan", "600121021263", "User1", "abc123", "R0001", "Western Food Restaurant", "012-3456789", address, "western@gmail.com");
-
-        man1 = new DeliveryMan("S0001", "Jason", "750303075313", "012-3456789", "123, Jalan ABC, 11200 Penang.", "jason@gmail.com", vehicle, "Employed", "Available");
-        man2 = new DeliveryMan("S0002", "David", "850512025411", "013-3456789", "456, Jalan DEF, 53300 KL.", "daivd@hotmail.com", vehicle, "Retired", "Not Available");
-        man3 = new DeliveryMan("S0003", "John", "781013016315", "016-3456789", "789, Jalan GHI, 30200 Perak.", "john@yahoo.com", vehicle, "Employed", "Delivering");
-        man4 = new DeliveryMan("S0004", "Kelvin", "901220101317", "017-3456789", "246, Jalan XYZ, 53430 KL.", "kelvin@live.com", vehicle, "Employed", "Available");
-
-        deliveryManList.add(man1);
-        deliveryManList.add(man2);
-        deliveryManList.add(man3);
-        deliveryManList.add(man4);
-
-        menu1 = new Menu("M0001", "Fish", 10.50, dateAdded);
-        menu2 = new Menu("M0002", "Chicken", 11.50, dateAdded);
-        menu3 = new Menu("M0003", "Pork", 11.00, dateAdded);
-
-        order1 = new Order("P0001", deliveryDate);
-        order1.placeOrder(menu1, 1);
-        order1.placeOrder(menu2, 2);
-        order1.placeOrder(menu3, 1);
-
-        order2 = new Order("P0002", deliveryDate);
-        order2.placeOrder(menu2, 3);
-        order2.placeOrder(menu1, 1);
-
-        order3 = new Order("P0003", deliveryDate);
-        order3.placeOrder(menu3, 1);
-        order3.placeOrder(menu1, 1);
-
-        orderList.add(order1);
-        orderList.add(order2);
-        orderList.add(order3);
-
-        destination1 = new Address("215", "Taman Bunga Raya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
-        destination2 = new Address("190", "Taman Melati", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
-        destination3 = new Address("128", "Taman Wangsa", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
+    public AssignDeliveryMan(ArrayList<Delivery> deliveryList, ArrayList<DeliveryMan> deliveryManList) {
+        this.deliveryList = deliveryList;
+        this.deliveryManList = deliveryManList;
         
-        delivery1 = new Delivery("L0001", deliveryDate, deliverySource, destination1, 4.90);
-        delivery2 = new Delivery("L0002", deliveryDate, deliverySource, destination2, 2.50);
-        delivery3 = new Delivery("L0003", deliveryDate, deliverySource, destination3, 3.60);
-
-        delivery1.addOrderList(order1);
-        delivery2.addOrderList(order2);
-        delivery3.addOrderList(order3);
-
-        deliveryList.add(delivery1);
-        deliveryList.add(delivery2);
-        deliveryList.add(delivery3);
-
         initialize();
     }
 
     private void displayDeliveryJob() {
-        
+        int count = 0;
         // Display Delivery
         System.out.println("List of Delivery : ");
         System.out.println(String.format("%-3s\t%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
-
+        availableDelivery.clear();
         for (int i = 0; i < deliveryList.size(); i++) {
-            System.out.print("" + (i + 1) + ". \t" + deliveryList.get(i).displayDelivery());
+            if (deliveryList.get(i).getDeliveryStatus().compareTo(PENDING) == 0) {
+                availableDelivery.add(deliveryList.get(i));
+                System.out.print("" + (++count) + ". \t" + deliveryList.get(i).displayDelivery());
+            }
         }
     }
 
@@ -119,7 +63,7 @@ public class AssignDeliveryMan {
         System.out.println(String.format("%-3s\t%-20s\t%-20s\t%-15s", "No.", "Delivery Man ID", "Working Status", "Delivery Status"));
         availableDeliveryMan.clear();
         for (int i = 0; i < deliveryManList.size(); i++) {
-            if (deliveryManList.get(i).getWorkingStatus().compareTo("Employed") == 0 && deliveryManList.get(i).getDeliveryStatus().compareTo("Available") == 0) {
+            if (deliveryManList.get(i).getWorkingStatus().compareTo(this.WORKING) == 0 && deliveryManList.get(i).getDeliveryStatus().compareTo(this.AVAILABLE_STATUS) == 0) {
                 availableDeliveryMan.add(deliveryManList.get(i));
                 System.out.print("" + (++count) + ". \t" + deliveryManList.get(i).displayDeliveryMan());
             }
@@ -134,7 +78,7 @@ public class AssignDeliveryMan {
             try {
                 deliverySelected = scan.nextInt();
 
-                if (deliverySelected <= 0 || deliverySelected > deliveryList.size()) {
+                if (deliverySelected <= 0 || deliverySelected > availableDelivery.size()) {
                     System.out.print("Please Enter Number that displayed in Delivery List only.");
                     failed = true;
                 } else {
@@ -176,7 +120,7 @@ public class AssignDeliveryMan {
     }
 
     private boolean confirmAssignation(int deliverySelected, int deliveryManSelected) {
-        String deliveryID = deliveryList.get(deliverySelected - 1).getDeliveryID();
+        String deliveryID = availableDelivery.get(deliverySelected - 1).getDeliveryID();
         String deliveryManID = availableDeliveryMan.get(deliveryManSelected - 1).getDeliveryManID();
         boolean result = true, valid;
         
@@ -201,9 +145,19 @@ public class AssignDeliveryMan {
     }
 
     private void assignDeliveryJob(int deliverySelected, int deliveryManSelected) {
-        Delivery selectedDelivery = deliveryList.get(deliverySelected - 1);
+        String deliveryID = availableDelivery.get(deliverySelected - 1).getDeliveryID();
         String manID = availableDeliveryMan.get(deliveryManSelected - 1).getDeliveryManID();
 
+        Delivery selectedDelivery = new Delivery();
+
+        for (int i = 0; i < deliveryList.size(); i++) {
+            if (deliveryList.get(i).getDeliveryID().compareTo(deliveryID) == 0) {
+                deliveryList.get(i).setDeliveryStatus(DELIVERING);
+                selectedDelivery = deliveryList.get(i);
+                break;
+            }
+        }
+        
         DeliveryMan selectedDeliveryMan = new DeliveryMan();
 
         for (int i = 0; i < deliveryManList.size(); i++) {
@@ -245,12 +199,12 @@ public class AssignDeliveryMan {
         System.out.println("\n\nSUMMARY of Deliveries\n");
         System.out.println(String.format("%-3s\t%-20s\t%-20s\t%-15s", "No.", "Delivery Man ID", "Working Status", "Delivery Status"));
         for (int i = 0; i < deliveryRecordList.size(); i++) {
-            System.out.println("======================================================================");
+            System.out.println("=======================================================================");
             System.out.println("" + (i + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryMan().displayDeliveryMan());
 
             System.out.println(String.format("\t%-3s\t%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10s", "No.", "Delivery ID", "Delivery Date", "Delivery Source", "Delivery Destination", "Order ID", "Delivery Charges(RM)"));
             for (int j = 0; j < deliveryRecordList.get(i).getDeliveryRecords().size(); j++) {
-                System.out.println("\t=====================================================================================================================================================");
+                System.out.println("\t====================================================================================================================================================================================");
                 System.out.println("\t" + (j + 1) + ". \t" + deliveryRecordList.get(i).getDeliveryRecords().get(j).displayDelivery());
             }
             System.out.println("\n\n");
@@ -287,8 +241,6 @@ public class AssignDeliveryMan {
                 Back to Main Menu
             */
         }
-
-        
 
         // List of order
         // List of Available Delivery Man 

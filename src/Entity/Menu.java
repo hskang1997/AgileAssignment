@@ -5,7 +5,6 @@
  */
 package Entity;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class Menu {
@@ -21,12 +20,12 @@ public class Menu {
     }
 
     // Constructor without menu status
-//    public Menu(String menuID, String menuName, double menuPrice, Date dateAdded) {
-//        this.menuID = menuID;
-//        this.menuName = menuName;
-//        this.menuPrice = menuPrice;
-//        this.dateAdded = dateAdded;
-//    }
+    public Menu(String menuID, String menuName, double menuPrice, Date dateAdded) {
+        this.menuID = menuID;
+        this.menuName = menuName;
+        this.menuPrice = menuPrice;
+        this.dateAdded = dateAdded;
+    }
 
     // Full
     public Menu(String menuID, String menuName, double menuPrice, boolean menuStatus, Date dateAdded) {
@@ -37,9 +36,9 @@ public class Menu {
         this.dateAdded = dateAdded;
     }
 
-    Menu(String m001, String ramen, double d, Calendar cal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    public Menu(String m001, String ramen, double d, Calendar cal) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
     public String getMenuID() {
         return menuID;
