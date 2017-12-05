@@ -13,6 +13,7 @@ public class Menu {
     private String menuName;
     private double menuPrice;
     private boolean menuStatus; // Available or Not Available
+    private String promotion;
     private Date dateAdded;
 
     // Empty Constructor
@@ -20,19 +21,29 @@ public class Menu {
     }
 
     // Constructor without menu status
-    public Menu(String menuID, String menuName, double menuPrice, Date dateAdded) {
+    public Menu(String menuID, String menuName, double menuPrice, String promotion, Date dateAdded) {
         this.menuID = menuID;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
+        this.promotion = promotion;
         this.dateAdded = dateAdded;
     }
 
+    public String getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(String promotion) {
+        this.promotion = promotion;
+    }
+
     // Full
-    public Menu(String menuID, String menuName, double menuPrice, boolean menuStatus, Date dateAdded) {
+    public Menu(String menuID, String menuName, double menuPrice, boolean menuStatus, String promotion, Date dateAdded) {
         this.menuID = menuID;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
         this.menuStatus = menuStatus;
+        this.promotion = promotion;
         this.dateAdded = dateAdded;
     }
 

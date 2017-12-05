@@ -48,10 +48,10 @@ public class FoodOrder {
         restaurantList.clear();
         int noRest = 0;
 
-        Menu menu1 = new Menu("M001", "Curry Ramen", 12.90, true, date);
-        Menu menu2 = new Menu("M002", "Blue Ramen", 22.90, true, date);
-        Menu menu3 = new Menu("M003", "Sushi AF", 10.90, true, date);
-        Menu menu4 = new Menu("M004", "Zheng Sushi", 5.90, true, date);
+        Menu menu1 = new Menu("M001", "Curry Ramen", 12.90, true, "", date);
+        Menu menu2 = new Menu("M002", "Blue Ramen", 22.90, true, "", date);
+        Menu menu3 = new Menu("M003", "Sushi AF", 10.90, true, "", date);
+        Menu menu4 = new Menu("M004", "Zheng Sushi", 5.90, true, "", date);
         menuList.add(menu1);
         menuList.add(menu2);
         menuList2.add(menu3);

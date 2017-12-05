@@ -127,9 +127,9 @@ public class FoodDeliverySystem {
         Date dateAdded = new Date(2017, 1, 1);
         Date deliveryDate = new Date(2017, 11, 3);
         
-        Menu menu1 = new Menu("M0001", "Fish", 10.50, dateAdded);
-        Menu menu2 = new Menu("M0002", "Chicken", 11.50, dateAdded);
-        Menu menu3 = new Menu("M0003", "Pork", 11.00, dateAdded);
+        Menu menu1 = new Menu("M0001", "Fish", 10.50, "", dateAdded);
+        Menu menu2 = new Menu("M0002", "Chicken", 11.50, "", dateAdded);
+        Menu menu3 = new Menu("M0003", "Pork", 11.00, "", dateAdded);
         
         Order order1 = new Order("P0001", deliveryDate);
         order1.placeOrder(menu1, 1);
