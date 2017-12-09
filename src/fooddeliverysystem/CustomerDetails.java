@@ -58,6 +58,7 @@ public class CustomerDetails {
         for (int i = 0; i < customerList.size(); i++) {
             if (phoneNumber.compareTo(customerList.get(i).getCustPhone()) == 0) {
                 System.out.println(customerList.get(i).toString());
+                break;
             }else{
                 System.out.println("Not found.");
                 searchPhone();
