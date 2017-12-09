@@ -152,9 +152,12 @@ public class AssignDeliveryMan {
 
         for (int i = 0; i < deliveryList.size(); i++) {
             if (deliveryList.get(i).getDeliveryID().compareTo(deliveryID) == 0) {
+                
                 deliveryList.get(i).setDeliveryStatus(DELIVERING);
+                
                 long arrivedDate = deliveryList.get(i).getDeliveryDate().getTime() + (60*60);   // set delivery arrival ETA
                 deliveryList.get(i).setArrivedDate(arrivedDate);                                // set delivery arrival ETA
+                
                 selectedDelivery = deliveryList.get(i);
                 break;
             }

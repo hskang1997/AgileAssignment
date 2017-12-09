@@ -26,6 +26,9 @@ public class FoodDeliverySystem {
 
     private final static String WORKING = "Working";
     private final static String BREAK = "Break";
+    private final static String DELIVERING = "Delivering";
+    private final static String AVAILABLE = "Available";
+    private final static String NOTAVAILABLE = "Not Available";
     private Scanner scan = new Scanner(System.in);
 
     public void displayTitle() {
@@ -40,6 +43,7 @@ public class FoodDeliverySystem {
         System.out.println("1. Assign Delivery to Delivery Man");
         System.out.println("2. Delivery Man Attendence");
         System.out.println("3. Tracking Delivery Order");
+        System.out.println("4. Tracking Delivery Man");
         System.out.println("0. Exit");
 
         do {
@@ -50,7 +54,7 @@ public class FoodDeliverySystem {
 
                 if (result == 0) {
                     failed = false;
-                } else if (result < 1 || result > 3) {
+                } else if (result < 1 || result > 4) {
                     System.out.print("Please Enter Number that displayed on Main Menu only.\n");
                     failed = true;
                 } else {
@@ -59,6 +63,42 @@ public class FoodDeliverySystem {
 
             } catch (NumberFormatException | java.util.InputMismatchException ex) {
                 System.out.print("Please Enter Number Only based on the Main Menu.\n");
+                failed = true;
+                scan.next();
+            }
+
+        } while (failed);
+
+        return result;
+    }
+
+    public int trackingMenu() {
+        int result = 0;
+        boolean failed = true;
+        System.out.println("\nTracking Delivery Man Status \n");
+        System.out.println("1. All Delivery Man Status");
+        System.out.println("2. Delivering Status");
+        System.out.println("3. Available Status");
+        System.out.println("4. Not Available Status");
+        System.out.println("0. Back");
+
+        do {
+            System.out.print("\nChoose the status option : ");
+
+            try {
+                result = scan.nextInt();
+
+                if (result == 0) {
+                    failed = false;
+                } else if (result < 1 || result > 4) {
+                    System.out.print("Please Enter Number that displayed on the Menu only.\n");
+                    failed = true;
+                } else {
+                    failed = false;
+                }
+
+            } catch (NumberFormatException | java.util.InputMismatchException ex) {
+                System.out.print("Please Enter Number Only based on the Menu.\n");
                 failed = true;
                 scan.next();
             }
@@ -171,10 +211,10 @@ public class FoodDeliverySystem {
 
         Affiliates deliverySource = new Affiliates("Kelvin Tan", "600121021263", "User1", "abc123", "R0001", "Western Food Restaurant", "012-3456789", address, "western@gmail.com");
 
-        DeliveryMan man1 = new DeliveryMan("S0001", "Jason", "750303075313", "012-3456789", address1, "jason@gmail.com", vehicle, WORKING, "Available");
-        DeliveryMan man2 = new DeliveryMan("S0002", "David", "850512025411", "013-3456789", address2, "daivd@hotmail.com", vehicle, BREAK, "Not Available");
-        DeliveryMan man3 = new DeliveryMan("S0003", "John", "781013016315", "016-3456789", address3, "john@yahoo.com", vehicle, WORKING, "Delivering");
-        DeliveryMan man4 = new DeliveryMan("S0004", "Kelvin", "901220101317", "017-3456789", address4, "kelvin@live.com", vehicle, WORKING, "Available");
+        DeliveryMan man1 = new DeliveryMan("S0001", "Jason", "750303075313", "012-3456789", address1, "jason@gmail.com", vehicle, WORKING, AVAILABLE);
+        DeliveryMan man2 = new DeliveryMan("S0002", "David", "850512025411", "013-3456789", address2, "daivd@hotmail.com", vehicle, BREAK, NOTAVAILABLE);
+        DeliveryMan man3 = new DeliveryMan("S0003", "John", "781013016315", "016-3456789", address3, "john@yahoo.com", vehicle, WORKING, DELIVERING);
+        DeliveryMan man4 = new DeliveryMan("S0004", "Kelvin", "901220101317", "017-3456789", address4, "kelvin@live.com", vehicle, WORKING, AVAILABLE);
 
         Address destination1 = new Address("215", "Taman Bunga Raya", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
         Address destination2 = new Address("190", "Taman Melati", 55333, "Setapak", "Kuala Lumpur", "Malaysia");
@@ -284,7 +324,6 @@ public class FoodDeliverySystem {
                         }
 
                         // System.out.println(customerPhone.compareTo("") != 0);
-
                         if (customerPhone.length() == 10) {
                             if (customerPhone.compareTo("0") == 0) {
                                 loop = false;
@@ -324,8 +363,44 @@ public class FoodDeliverySystem {
 
                     break;
 
+                case 4:
+
+                    int result = fds.trackingMenu();
+                    TrackDeliveryMan tdm = new TrackDeliveryMan(deliveryManList);
+
+                    switch (result) {
+                        case 0:
+                            response = true;
+                            break;
+
+                        case 1: // All Delivery Man Status
+                            tdm.displayAllDeliveryManStatus();
+                            response = fds.continueMsg();
+                            break;
+
+                        case 2: // Delivering Status
+                            tdm.displaySelectedDeliveryStatus(DELIVERING);
+                            response = fds.continueMsg();
+                            break;
+
+                        case 3: // Available Status
+                            tdm.displaySelectedDeliveryStatus(AVAILABLE);
+                            response = fds.continueMsg();
+                            break;
+
+                        case 4: // Not Available Status
+                            tdm.displaySelectedDeliveryStatus(NOTAVAILABLE);
+                            response = fds.continueMsg();
+                            break;
+
+                        default:
+                            break;
+                    }
+                    break;
+
                 default:
                     break;
+
             }
         } while (response);
 
