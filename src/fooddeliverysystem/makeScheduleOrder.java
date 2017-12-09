@@ -51,6 +51,7 @@ public class makeScheduleOrder {
     ArrayList<MenuScheduleOrder> selectedMenu = new ArrayList<>();
     ArrayList<Integer> orderQty = new ArrayList<>();
     List<ScheduledOrders> listScheduleOrders = new ArrayList<>();
+    Customer customer = new Customer("Koh Yee Chieh", "012-4939984", address2, "ycsasa@gamil.com");
 
     int userEnteredMeal = 0;
     int actualSelectedMealIndex = 0;
@@ -68,11 +69,73 @@ public class makeScheduleOrder {
     public static void main(String[] args) {
         // TODO code application logic here
         makeScheduleOrder test = new makeScheduleOrder();
-        test.makeOrders();
+        test.mainMenu(test.customer, test.listScheduleOrders);
 
     }
 
-    public void makeOrders() {
+    public void mainMenu(Customer customer, List<ScheduledOrders> listScheduleOrders) {
+        Scanner input = new Scanner(System.in);
+        boolean valid = false;
+        int choice = 0;
+        do {
+            System.out.println("Available choice: ");
+            System.out.println("1. Place Schedule Order ");
+            System.out.println("2. Check Order ");
+
+            do {
+                try {
+                    System.out.println("Please select a option: ");
+                    choice = input.nextInt();
+                    valid = false;
+                    break;
+                } catch (InputMismatchException ex) {
+                    System.out.println("Please enter interger within the available options only.");
+                    input.next();
+                    valid = true;
+                }
+            } while (valid == true);
+
+            if (choice <= 0 && choice > 2) {
+                System.out.println("Please enter interger within the available options only.");
+            }
+        } while (choice <= 0 && choice > 2);
+        if (choice == 1) {
+            makeOrders(customer, listScheduleOrders);
+        } else {
+            checkOrders(customer, listScheduleOrders);
+        }
+
+    }
+
+    public void checkOrders(Customer customer, List<ScheduledOrders> listScheduleOrders) {
+        System.out.println();
+        for (int i = 0; i < listScheduleOrders.size(); i++) {
+            if (customer.getCustName().equals(listScheduleOrders.get(i).getCustomer().getCustName())) {
+                System.out.println("Order Details");
+                System.out.println("=============");
+                System.out.print("Order ID: ");
+                System.out.println(listScheduleOrders.get(i).getOrderID());
+                System.out.println("Order Date & Time :" + listScheduleOrders.get(i).getOrderDateTime());
+                System.out.println("Menu Name   Quantity    Price(per unit)");
+                for (int j = 0; j < listScheduleOrders.get(i).getOrderedMenu().size(); j++) {
+                    System.out.println(listScheduleOrders.get(i).getOrderedMenu().get(j).getMenuName() + "           "
+                            + listScheduleOrders.get(i).getOrderedMenuQty().get(j)
+                            + "           " + listScheduleOrders.get(i).getOrderedMenu().get(j).getMenuPrice());
+                }
+                System.out.println("Deliver Time : " + listScheduleOrders.get(i).getSelectedTime());
+                System.out.println("Deliver Address : " + listScheduleOrders.get(i).getDeliveryAddress());
+                System.out.println("Subtotal: " + listScheduleOrders.get(i).getSubtotal());
+                System.out.println();
+                System.out.println();
+                
+                DeliveryScheduled ds = new DeliveryScheduled();
+                ds.createDeliverySchedule(listScheduleOrders);
+            }
+        }
+
+    }
+
+    public void makeOrders(Customer customer, List<ScheduledOrders> listScheduleOrders) {
         scheduledOrders = new ScheduledOrders();
         selectedMenu.clear();
         arrRestaurant.clear();
@@ -130,11 +193,11 @@ public class makeScheduleOrder {
             arrListMenu.add(menu8);
             arrListMenu.add(menu9);
 
-            continueOrder();
+            continueOrder(customer, listScheduleOrders);
         }
     }
 
-    public void continueOrder() {
+    public void continueOrder(Customer customer, List<ScheduledOrders> listScheduleOrders) {
         boolean check = false;
         arrlistMenu1.clear();
         System.out.println();
@@ -174,7 +237,7 @@ public class makeScheduleOrder {
             }
         } while (userEnteredMeal < 0 || userEnteredMeal >= arrlistMenu1.size() + 1);
         if (userEnteredMeal == 0) {
-            makeOrders();
+            makeOrders(customer, listScheduleOrders);
         } else {
             if (arrlistMenu1.get(actualSelectedMealIndex).isMenuStatus()) {
                 System.out.println();
@@ -201,7 +264,7 @@ public class makeScheduleOrder {
 
                 } while (userEnteredMeal < 0 || userEnteredMeal >= arrlistMenu1.size() + 1);
                 if (userEnteredMeal == 0) {
-                    makeOrders();
+                    makeOrders(customer, listScheduleOrders);
                 } else {
                     if (arrlistMenu1.get(actualSelectedMealIndex).isMenuStatus() && wrongCount < 2) {
                         System.out.println();
@@ -228,7 +291,7 @@ public class makeScheduleOrder {
                             } while (check == true);
                         } while (userEnteredMeal < 0 || userEnteredMeal >= arrlistMenu1.size() + 1);
                         if (userEnteredMeal == 0) {
-                            makeOrders();
+                            makeOrders(customer, listScheduleOrders);
                         } else {
                             if (arrlistMenu1.get(actualSelectedMealIndex).isMenuStatus() && wrongCount < 3) {
                                 System.out.println();
@@ -263,7 +326,7 @@ public class makeScheduleOrder {
             }
         } while (qty < 0 || qty > 10);
         if (qty == 0) {
-            makeOrders();
+            makeOrders(customer, listScheduleOrders);
         } else {
             selectedMenu.add(arrlistMenu1.get(actualSelectedMealIndex));
             orderQty.add(qty);
@@ -287,14 +350,14 @@ public class makeScheduleOrder {
                 }
             } while (contChoice < 1 || contChoice > 2);
             if (contChoice == 1) {
-                continueOrder();
+                continueOrder(customer, listScheduleOrders);
             } else {
-                orderAddressTime();
+                orderAddressTime(customer, listScheduleOrders);
             }
         }
     }
 
-    public void orderAddressTime() {
+    public void orderAddressTime(Customer customer, List<ScheduledOrders> listScheduleOrders) {
         boolean check = false;
         System.out.println();
         System.out.println("Delivery Schedule: ");
@@ -350,7 +413,7 @@ public class makeScheduleOrder {
                 } while (selectedArea < 0 || selectedArea > 3);
                 switch (selectedArea) {
                     case 0:
-                        orderAddressTime();
+                        orderAddressTime(customer, listScheduleOrders);
                         break;
                     case 1:
                     case 2:
@@ -378,19 +441,19 @@ public class makeScheduleOrder {
                         scheduledOrders.setDeliveryArea(area);
 
                         scheduledOrders.setRestaurant(restaurant1);
-                        orderCalculationAndSummary();
+                        orderCalculationAndSummary(customer, listScheduleOrders);
                         break;
 
                 }
                 break;
             case 0:
-                continueOrder();
+                continueOrder(customer, listScheduleOrders);
                 break;
 
         }
     }
 
-    public void orderCalculationAndSummary() {
+    public void orderCalculationAndSummary(Customer cust, List<ScheduledOrders> listScheduleOrders) {
         boolean valid = false;
         double amount = 0;
         double gstAmount = 0;
@@ -412,6 +475,7 @@ public class makeScheduleOrder {
         scheduledOrders.setTotalAmount(amount);
         scheduledOrders.setDeliveryfees(deliveryFee);
         scheduledOrders.setSubtotal(total);
+        scheduledOrders.setCustomer(cust);
 
         System.out.println();
         System.out.println();
@@ -423,7 +487,7 @@ public class makeScheduleOrder {
         System.out.println("Deliver Time : " + scheduledOrders.getSelectedTime());
         System.out.println("Deliver Address : " + scheduledOrders.getDeliveryAddress());
         System.out.println("Amount: " + scheduledOrders.getTotalAmount());
-        System.out.println("GST : " + String.format("%.2f",scheduledOrders.getGstAmount()));
+        System.out.println("GST : " + String.format("%.2f", scheduledOrders.getGstAmount()));
         System.out.println("Delivery Fees: " + scheduledOrders.getDeliveryfees());
         System.out.println("Subtotal: " + scheduledOrders.getSubtotal());
 
@@ -446,8 +510,8 @@ public class makeScheduleOrder {
             System.out.println();
             System.out.println("Order Summary");
             System.out.println("=============");
-            System.out.println("Order ID : " +scheduledOrders.getOrderID());
-            System.out.println("Order Date & Time :"+ scheduledOrders.getOrderDateTime());
+            System.out.println("Order ID : " + scheduledOrders.getOrderID());
+            System.out.println("Order Date & Time :" + scheduledOrders.getOrderDateTime());
             System.out.println("Menu Name   Quantity    Price(per unit)");
             for (int i = 0; i < selectedMenu.size(); i++) {
                 System.out.println(scheduledOrders.getOrderedMenu().get(i).getMenuName() + "           " + scheduledOrders.getOrderedMenuQty().get(i)
@@ -456,14 +520,25 @@ public class makeScheduleOrder {
             System.out.println("Deliver Time : " + scheduledOrders.getSelectedTime());
             System.out.println("Deliver Address : " + scheduledOrders.getDeliveryAddress());
             System.out.println("Amount: " + scheduledOrders.getTotalAmount());
-            System.out.println("GST : " + String.format("%.2f",scheduledOrders.getGstAmount()));
+            System.out.println("GST : " + String.format("%.2f", scheduledOrders.getGstAmount()));
             System.out.println("Delivery Fees: " + scheduledOrders.getDeliveryfees());
             System.out.println("Subtotal: " + scheduledOrders.getSubtotal());
             System.out.println();
             System.out.println("Thanks for using our system");
-            DeliveryScheduled ds = new DeliveryScheduled();
-            ds.createDeliverySchedule(listScheduleOrders);
-
+            do {
+                System.out.println("Back to main menu?[y/n]");
+                confirm = scan.next();
+                valid = check(confirm);
+                if (valid == false) {
+                    System.out.println("Please enter [y/n] only.");
+                }
+            } while (valid == false);
+            if (confirm.equals("y") || confirm.equals("Y")) {
+                mainMenu(customer, listScheduleOrders);
+            } else {
+                DeliveryScheduled ds = new DeliveryScheduled();
+                ds.createDeliverySchedule(listScheduleOrders);
+            }
         } else {
             System.out.println("Thanks for using our system");
             scheduledOrders = new ScheduledOrders();

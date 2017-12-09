@@ -15,10 +15,12 @@ public class DeliveryScheduled {
     Delivery delivery;
     Date date = new Date(2017 + 1900, 11 - 1, 25, 11, 22, 30);
     Address address = new Address("L332", "Jalan Danau Jaya 3", 13500, "Setapak", "Kuala Lumpur", "Malaysia");
+    Address address2 = new Address("A2-5", "Jalan Tembikai 4", 13500, "Setapak", "Kuala Lumpur", "Malaysia");
     Address address1 = new Address("L032", "Jalan Danau Jaya 1", 13500, "Setapak", "Kuala Lumpur", "Malaysia");
     Address address3 = new Address("D-215", "Jalan Lang Lama 2", 13500, "Klang", "Kuala Lumpur", "Malaysia");
     Affiliates restaurant3 = new Affiliates("Koh", "901212-02-9875", "Mcdonald123", "5201314", "Mcdonald", "AS0335680-V", "012-3456789", address3, "Mcdonald@gmail.com");
-    ScheduledOrders so = new ScheduledOrders("SO0000", date, "8:00 PM", address1, "12, Lorong Hati 3, Setapak", restaurant3, 12, 0.72, 5, 17.72);
+    Customer customer = new Customer("Lim Sin Kheng", "012-4939984", address2, "lsksasa@gamil.com");
+    ScheduledOrders so = new ScheduledOrders(customer, "SO0000", date, "8:00 PM", address1, "12, Lorong Hati 3, Setapak", restaurant3, 12, 0.72, 5, 17.72);
     List<Delivery> listDelivery = new ArrayList<>();
 
     public static void main(String[] args) {

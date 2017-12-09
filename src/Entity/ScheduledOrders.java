@@ -28,12 +28,14 @@ public class ScheduledOrders {
     private double gstAmount;
     private double deliveryfees;
     private double subtotal;
+    private Customer customer;
     
     public ScheduledOrders() {
 
     }
 
-    public ScheduledOrders(String orderID, Date orderDateTime, String selectedTime, Address deliveryArea, String deliveryAddress, Affiliates restaurant, double totalAmount, double gstAmount, double deliveryfees, double subtotal) {
+    public ScheduledOrders(Customer customer,String orderID, Date orderDateTime, String selectedTime, Address deliveryArea, String deliveryAddress, Affiliates restaurant, double totalAmount, double gstAmount, double deliveryfees, double subtotal) {
+        this.customer = customer;
         this.orderID = orderID;
         this.orderDateTime = orderDateTime;
         this.selectedTime = selectedTime;
@@ -46,11 +48,21 @@ public class ScheduledOrders {
         this.subtotal = subtotal;
     }
 
-    public ScheduledOrders(String orderID, Date orderDate) {
+    public ScheduledOrders(String orderID, Date orderDate, Customer customer) {
         this.orderID = orderID;
         this.orderDateTime = orderDate;
+        this.customer = customer;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    
     public Address getAddress() {
         return address;
     }

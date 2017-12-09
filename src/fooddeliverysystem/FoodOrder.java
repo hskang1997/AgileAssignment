@@ -22,6 +22,7 @@ public class FoodOrder {
     private ArrayList<Menu> menuList2 = new ArrayList<Menu>();
     private ArrayList<Affiliates> restaurantList = new ArrayList<Affiliates>();
     static int foSize = 0;
+    boolean check = false;
     Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -40,7 +41,6 @@ public class FoodOrder {
         double totalPrice = 0;
         double gst = 0;
         double totalAmount = 0;
-        boolean check = false;
         boolean valid = true;
 
         menuList.clear();
@@ -58,14 +58,14 @@ public class FoodOrder {
         menuList2.add(menu4);
         Address address = new Address("B-21-10", "Jalan Danau Saujana", 53000, "Setapak", "Kuala Lumpur", "Malaysia");
         Address address2 = new Address("B-21-10", "Jalan Danau Saujana", 53000, "Setapak", "Kuala Lumpur", "Malaysia");
-        Affiliates restaurant1 = new Affiliates("Goh", "950909-02-6568", "harutei", "harutei1234", "Harutei", "AS01561898-V", "012-3456789", address, "Harutei@gmail.com");
-        Affiliates restaurant2 = new Affiliates("Lim", "970908-02-6988", "sushiking", "sushi1234", "Sushi King", "AS04993821-V", "012-3456789", address2, "sushiKing@gmail.com");
+        Affiliates restaurant1 = new Affiliates("Goh", "950909-02-6568", "harutei", "harutei1234", "AS01561898-V", "Harutei", "012-3456789", address, "Harutei@gmail.com");
+        Affiliates restaurant2 = new Affiliates("Lim", "970908-02-6988", "sushiking", "sushi1234", "AS04993821-V", "Sushi King", "012-3456789", address2, "sushiKing@gmail.com");
         restaurantList.add(restaurant1);
         restaurantList.add(restaurant2);
 
         for (int r = 0; r < restaurantList.size(); r++) {
             System.out.print(String.format("\n%d. ", r + 1));
-            System.out.println(restaurantList.get(r).toString());
+            System.out.println(restaurantList.get(r).getRestaurantName());
         }
         do {
             System.out.print("Enter a restaurant number: ");
@@ -173,7 +173,7 @@ public class FoodOrder {
                 foodOrder.add(order2);
 
             } else {
-                check = confirmation(); // check confirmation
+                cancel();// check confirmation
 
             }
         } while (check == true);
@@ -185,6 +185,11 @@ public class FoodOrder {
         }
         System.out.println(order.total());
 
+    }
+
+    public void cancel() {
+        foodOrder.clear();
+        check = confirmation();
     }
 
     public boolean confirmation() {

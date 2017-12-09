@@ -16,6 +16,7 @@ public class addDeliveryMen {
 
     public void add() {
         Scanner scanner = new Scanner(System.in);
+        Scanner scanner1 = new Scanner(System.in);
         DeliveryMan deliveryMen = new DeliveryMan();
         Vehicle vehicle = new Vehicle();
         Address address = new Address();
@@ -40,9 +41,9 @@ public class addDeliveryMen {
         System.out.println("Please enter delivery men area:");
         address.setArea(scanner.next());
         System.out.println("Please enter delivery men state:");
-        address.setState(scanner.next());
+        address.setState(scanner1.next());
         System.out.println("Please enter delivery men contry:");
-        address.setCountry(scanner.next());
+        address.setCountry(scanner1.next());
         deliveryMen.setHomeAddress(address);
 //        System.out.println("Please enter delivery men address:");
 //        deliveryMen.setHomeAddress(scanner.nextLine());
