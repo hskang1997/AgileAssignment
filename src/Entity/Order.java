@@ -7,7 +7,6 @@ package Entity;
 
 import java.util.Date;
 import java.util.ArrayList;
-import Entity.*;
 
 /**
  *
@@ -19,34 +18,11 @@ public class Order {
 
     private String orderID;
     private Date orderDate;
+    private int foodQty;
     private String foodName;
     private double totalPrice;
     private double foodPrice;
-
-    public double getFoodPrice() {
-        return foodPrice;
-    }
-
-    public void setFoodPrice(double foodPrice) {
-        this.foodPrice = foodPrice;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-    private int foodQty;
-
-    public int getFoodQty() {
-        return foodQty;
-    }
-
-    public void setFoodQty(int foodQty) {
-        this.foodQty = foodQty;
-    }
+    private Customer customer;
     private double totalAmount; // exclude gst amount
     private double gstAmount;
     private ArrayList<Menu> orderedMenu = new ArrayList<Menu>();
@@ -73,9 +49,10 @@ public class Order {
     }
 
     // Only Order ID & Order Date
-    public Order(String orderID, Date orderDate) {
+    public Order(String orderID, Date orderDate, Customer customer) {
         this.orderID = orderID;
         this.orderDate = orderDate;
+        this.customer = customer;
     }
 
     public String getFoodName() {
@@ -124,6 +101,38 @@ public class Order {
 
     public void setOrderedMenu(ArrayList<Menu> orderedMenu) {
         this.orderedMenu = orderedMenu;
+    }
+    
+    public double getFoodPrice() {
+        return foodPrice;
+    }
+
+    public void setFoodPrice(double foodPrice) {
+        this.foodPrice = foodPrice;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public int getFoodQty() {
+        return foodQty;
+    }
+
+    public void setFoodQty(int foodQty) {
+        this.foodQty = foodQty;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public void placeOrder(Menu menu, int qty) {

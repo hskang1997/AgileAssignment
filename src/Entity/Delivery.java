@@ -20,11 +20,12 @@ public class Delivery {
     private Date deliveryDate;
     private Affiliates deliverySource;
     private Address deliveryDestination;
-    private ArrayList<Order> orderList = new ArrayList<Order>();
+    private Order order = null;
     private double deliveryCharges;
-    private String deliveryStatus;
+    private String deliveryStatus; // Delivering or Pending or Delivered
     private DeliveryMan deliveryMan;
     private ScheduledOrders so;
+    private Date arrivedDate = null;
 
     // Empty Constructor
     public Delivery() {
@@ -80,6 +81,14 @@ public class Delivery {
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
+    
+    public String getFormattedDeliveryDate() {
+        return this.deliveryDate.getDate() + " " + this.month[this.deliveryDate.getMonth()] + " " + this.deliveryDate.getYear();
+    }
+    
+    public String getFormattedDeliveryDateTime() {
+        return this.deliveryDate.getDate() + " " + this.month[this.deliveryDate.getMonth()] + " " + this.deliveryDate.getYear() + " " + this.deliveryDate.getHours() + ":" + this.deliveryDate.getMinutes() + ":" + this.deliveryDate.getSeconds();
+    }
 
     public Affiliates getDeliverySource() {
         return deliverySource;
@@ -97,16 +106,12 @@ public class Delivery {
         this.deliveryDestination = deliveryDestination;
     }
 
-    public ArrayList<Order> getOrderList() {
-        return orderList;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderList(ArrayList<Order> orderList) {
-        this.orderList = orderList;
-    }
-
-    public void addOrderList(Order order) {
-        this.orderList.add(order);
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public double getDeliveryCharges() {
@@ -125,26 +130,40 @@ public class Delivery {
         this.deliveryStatus = deliveryStatus;
     }
 
+    public Date getArrivedDate() {
+        return arrivedDate;
+    }
+    
+    public void setArrivedDate(Date arrivedDate) {
+        this.arrivedDate = arrivedDate;
+    }
+
+    public void setArrivedDate(long arrivedDate) {
+        this.arrivedDate = new Date(arrivedDate);
+    }
+
+    public String getFormattedArrivedDate() {
+        return this.arrivedDate.getDate() + " " + this.month[this.arrivedDate.getMonth()] + " " + this.arrivedDate.getYear();
+    }
+    
+    public String getFormattedArrivedDateTime() {
+        return this.arrivedDate.getDate() + " " + this.month[this.arrivedDate.getMonth()] + " " + this.arrivedDate.getYear() + " " + this.arrivedDate.getHours() + ":" + this.arrivedDate.getMinutes() + ":" + this.arrivedDate.getSeconds();
+    }
+    
     public String displayOrderList() {
         String orderResult = "";
 
-        if (!orderList.isEmpty()) {
+        if (order!=null) {
             orderResult += "No. \t Order ID \t Order Date \t Amount(RM)\n";
-            for (int i = this.orderList.size(); i >= 0; i--) {
-                orderResult += this.orderList.get(i).getOrderID() + " " + this.orderList.get(i).getOrderDate() + " " + this.orderList.get(i).getTotalAmount() + "\n";
-            }
+            
+                orderResult += this.order.getOrderID() + " " + this.order.getOrderDate() + " " + this.order.getTotalAmount() + "\n";
         }
 
         return orderResult;
     }
 
     public String displayDelivery() {
-        String orderIDs = "";
-        
-        for (int i=0; i < orderList.size(); i++) {
-            orderIDs += orderList.get(i).getOrderID() + " ";
-        }
             
-        return String.format("%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10.2f\n", this.deliveryID, this.deliveryDate.getDate() + " " + this.month[this.deliveryDate.getMonth()] + " " + this.deliveryDate.getYear(), this.deliverySource.getRestaurantName(), this.deliveryDestination.toString(), orderIDs, this.deliveryCharges);
+        return String.format("%-10s\t%-20s\t%-30s\t%-60s\t%-10s\t%-10.2f\n", this.deliveryID, this.getFormattedDeliveryDate(), this.deliverySource.getRestaurantName(), this.deliveryDestination.toString(), this.order.getOrderID(), this.deliveryCharges);
     }
 }
